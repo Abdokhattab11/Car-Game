@@ -10,8 +10,8 @@ class car:
         # Coordinates
         self.left = 20
         self.bottom = 20
-        self.right = 90
-        self.top = 60
+        self.right = 80
+        self.top = 50
         # Car State
         self.health = 0
         self.light = False

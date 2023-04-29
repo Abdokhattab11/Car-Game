@@ -8,22 +8,24 @@ import pygame
 class car:
     def __init__(self):
         # Coordinates
-        self.left = 0
-        self.bottom = 0
-        self.right = 0
-        self.top = 0
+        self.left = 20
+        self.bottom = 20
+        self.right = 90
+        self.top = 60
         # Car State
         self.health = 0
         self.light = False
         # Car Pyhsics
-        self.rotAngle = 0
-        self.direction = 0
-        self.currSpeed = 0
-        self.speed = 0
-        self.forwardAcc = 0
-        self.backwardAcc = 0
+        self.rot = 0  # is am rotating or not -->> can be 1 or -1
+        self.rotAngle = 0  # what value of rotation
+        self.direction = 0  # 1 if 'w', -1 if 's, 0 else
+        self.currSpeed = 0  # 1 if 'w' or 's' else 0
+        self.speed = 0     # to be increment
+        self.forwardAcc = 0.1
+        self.backwardAcc = 0.1
 
     def draw(self):
+        glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
         glVertex(self.left, self.bottom, 0)
         glVertex(self.right, self.bottom, 0)

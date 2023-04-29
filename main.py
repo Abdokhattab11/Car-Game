@@ -8,6 +8,8 @@ WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
 PERIOD = 10
 
+carModel = car()
+
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -19,7 +21,13 @@ def init_proj():
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
+
+    glPushMatrix()
     draw_map()
+    glPopMatrix()
+    glPushMatrix()
+    carModel.draw()
+    glPopMatrix()
     glutSwapBuffers()
 
 
@@ -28,12 +36,27 @@ def Timer(v):
     glutTimerFunc(PERIOD, Timer, 1)
 
 
-def keyboardup(key, x, y):
-    return
-
-
 def keyboard(key, x, y):
-    return
+    global carModel
+    if key == b"w":
+        carModel.direction = 1
+        carModel.speed = 1
+    if key == b"s":
+        carModel.direction = -1
+        carModel.speed = 1
+    if key == b"d":
+        carModel.rot = 1
+    if key == b"a":
+        carModel.rot = -1
+
+
+def keyboardup(key, x, y):
+    global carModel
+    if key == b"w" or key == b"s":
+        carModel.direction = 0
+        carModel.speed = 0
+    if key == b"d" or key == b"a":
+        carModel.rot = 0
 
 
 if __name__ == "__main__":

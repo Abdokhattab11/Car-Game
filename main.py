@@ -16,7 +16,7 @@ def init_proj():
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-
+# iam youssef elfeky
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
     draw_map()

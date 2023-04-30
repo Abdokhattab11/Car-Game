@@ -61,6 +61,12 @@ class car:
         elif self.currSpeed > self.speed:
             self.currSpeed += self.backwardAcc
 
+        # Equation to control the acceleration of the car
+        if self.speed > 0.1:
+            self.forwardAcc = 0.1 / self.speed
+        else:
+            self.forwardAcc = 0.1
+
         self.rotAngle += self.rot*self.currSpeed*0.6    # <----------------------- This is the edit of rotaiton
 
     def load_texture(self):

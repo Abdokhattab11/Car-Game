@@ -61,7 +61,7 @@ class car:
         elif self.currSpeed > self.speed:
             self.currSpeed += self.backwardAcc
 
-        self.rotAngle += self.rot*self.currSpeed
+        self.rotAngle += self.rot*self.currSpeed*0.6    # <----------------------- This is the edit of rotaiton
 
     def load_texture(self):
         return

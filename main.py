@@ -42,7 +42,7 @@ def Timer(v):
 def keyboard(key, x, y):
     global carModel
     if key == b"w":
-        carModel.speed = 1.5
+        carModel.speed = 1.5   # <----------------------- This is the edit of speed
     if key == b"s":
         carModel.speed = -1.5
     if key == b"d":

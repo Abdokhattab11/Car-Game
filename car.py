@@ -3,6 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from math import *
 import pygame
+from texture import *
 
 
 class car:
@@ -23,14 +24,20 @@ class car:
         self.forwardAcc = 0.1
         self.backwardAcc = -0.1
 
-    def draw(self):
+    def draw(self, idx=0):
         glColor3f(1, 1, 1)
+        glBindTexture(GL_TEXTURE_2D, texture_names[idx])
         glBegin(GL_POLYGON)
+        glTexCoord2f(0, 0)
         glVertex(self.left, self.bottom, 0)
+        glTexCoord2f(1, 0)
         glVertex(self.right, self.bottom, 0)
+        glTexCoord2f(1, 1)
         glVertex(self.right, self.top, 0)
+        glTexCoord2f(0, 1)
         glVertex(self.left, self.top, 0)
         glEnd()
+        glBindTexture(GL_TEXTURE_2D, -1)
 
     def center(self):
         return [(self.left + self.right)/2, (self.top + self.bottom)/2]

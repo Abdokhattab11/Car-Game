@@ -3,6 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from maze import *
 from car import *
+from texture import *
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
@@ -13,6 +14,10 @@ carModel = car()
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    load_texture()
+
     glMatrixMode(GL_PROJECTION)
     glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
     glMatrixMode(GL_MODELVIEW)
@@ -28,7 +33,7 @@ def display():
 
     glPushMatrix()
     carModel.animation()
-    carModel.draw()
+    carModel.draw(1)
     glPopMatrix()
     print(carModel.currSpeed)
     glutSwapBuffers()

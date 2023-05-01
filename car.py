@@ -54,7 +54,7 @@ class car:
         self.top = self.top + sin(theta)*self.currSpeed
         self.bottom = self.bottom + sin(theta)*self.currSpeed
 
-        if abs(self.currSpeed - self.speed) <= 0.01:  # to avoid floating prection
+        if abs(self.currSpeed - self.speed) <= 0.1:  # to avoid floating prection
             self.currSpeed = self.speed
         elif self.currSpeed < self.speed:
             self.currSpeed += self.forwardAcc
@@ -71,7 +71,8 @@ class car:
         else:
             self.backwardAcc = -0.1
 
-        self.rotAngle += self.rot*self.currSpeed*0.4    # <----------------------- This is the edit of rotaiton
+        # <----------------------- This is the edit of rotaiton
+        self.rotAngle += self.rot*self.currSpeed*0.4
 
     def load_texture(self):
         return

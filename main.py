@@ -30,7 +30,7 @@ def display():
     carModel.animation()
     carModel.draw()
     glPopMatrix()
-
+    print(carModel.currSpeed)
     glutSwapBuffers()
 
 

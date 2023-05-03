@@ -20,8 +20,8 @@ class car:
         self.rotAngle = 0  # what value of rotation
         self.currSpeed = 0  # 1 if 'w' or 's' else 0
         self.speed = 0     # to be increment
-        self.forwardAcc = 0.1
-        self.backwardAcc = -0.1
+        self.forwardAcc = 0.02333333
+        self.backwardAcc = -0.0233333
 
     def draw(self):
         glColor3f(1, 1, 1)
@@ -72,7 +72,7 @@ class car:
             self.backwardAcc = -0.1
 
         # <----------------------- This is the edit of rotaiton
-        self.rotAngle += self.rot*self.currSpeed*0.4
+        self.rotAngle += self.rot*self.currSpeed*0.8
 
     def load_texture(self):
         return

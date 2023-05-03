@@ -49,6 +49,9 @@ def keyboard(key, x, y):
         carModel.rot = -1.5  # to make it smooth
     if key == b"a":
         carModel.rot = 1.5  # to make it aasmooth
+    if key == b"b":
+        carModel.currSpeed = 0
+        carModel.speed = 0
 
 
 def keyboardup(key, x, y):

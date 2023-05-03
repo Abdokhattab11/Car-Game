@@ -23,6 +23,7 @@ class car:
         self.speed = 0     # to be increment
         self.forwardAcc = 0.02333333
         self.backwardAcc = -0.0233333
+        # in case of inertia
         self.friction = -0.05
 
     def draw(self):
@@ -51,8 +52,14 @@ class car:
         #####################################
         # Now we need to adjust the Vertices
         theta = self.rotAngle*(pi/180)
+
+        # Delta in x direction is proportional to Cos(theta) and currspeed
+        # The greater currentspeed , the greater the shift
         self.left = self.left + cos(theta)*self.currSpeed
         self.right = self.right + cos(theta)*self.currSpeed
+
+        # Delta in x direction is proportional to Cos(theta) and currspeed
+        # The greater currentspeed , the greater the shift
         self.top = self.top + sin(theta)*self.currSpeed
         self.bottom = self.bottom + sin(theta)*self.currSpeed
 
@@ -71,7 +78,7 @@ class car:
             else:
                 self.currSpeed += self.friction*sign(self.currSpeed)
 
-        # <----------------------- This is the edit of rotaiton
+        # We need to adjust rotAngle -->> if self.rot is active
         self.rotAngle += self.rot*self.currSpeed*0.5
 
     def load_texture(self):

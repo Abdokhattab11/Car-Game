@@ -2,6 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from math import *
+from numpy import sign
 import pygame
 
 
@@ -22,6 +23,7 @@ class car:
         self.speed = 0     # to be increment
         self.forwardAcc = 0.02333333
         self.backwardAcc = -0.0233333
+        self.friction = -0.05
 
     def draw(self):
         glColor3f(1, 1, 1)
@@ -54,25 +56,23 @@ class car:
         self.top = self.top + sin(theta)*self.currSpeed
         self.bottom = self.bottom + sin(theta)*self.currSpeed
 
-        if abs(self.currSpeed - self.speed) <= 0.1:  # to avoid floating prection
-            self.currSpeed = self.speed
-        elif self.currSpeed < self.speed:
-            self.currSpeed += self.forwardAcc
-        elif self.currSpeed > self.speed:
-            self.currSpeed += self.backwardAcc
-
-        # Equation to control the acceleration of the car
-        if self.speed > 0.1:
-            self.forwardAcc = 0.035 / self.speed
-        else:
-            self.forwardAcc = 0.1
-        if self.speed < -0.1:
-            self.backwardAcc = 0.035 / self.speed
-        else:
-            self.backwardAcc = -0.1
+        # Case 1 : if car has speed to be reaced
+        if self.speed != 0:
+            if abs(self.currSpeed - self.speed) <= 0.1:  # to avoid floating prection
+                self.currSpeed = self.speed
+            elif self.currSpeed < self.speed:
+                self.currSpeed += self.forwardAcc
+            elif self.currSpeed > self.speed:
+                self.currSpeed += self.backwardAcc
+        # Case 2 : Inertia
+        elif self.speed == 0 and self.currSpeed != 0:
+            if abs(self.currSpeed) <= 0.1:
+                self.currSpeed = 0
+            else:
+                self.currSpeed += self.friction*sign(self.currSpeed)
 
         # <----------------------- This is the edit of rotaiton
-        self.rotAngle += self.rot*self.currSpeed*0.8
+        self.rotAngle += self.rot*self.currSpeed*0.5
 
     def load_texture(self):
         return

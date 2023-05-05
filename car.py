@@ -25,16 +25,14 @@ class car:
         self.backwardAcc = -0.0233333
         # in case of inertia
         self.friction = -0.05
+        self.collosion = False
 
     def draw(self):
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
         glVertex(self.bottom, self.left, 0)
-        glColor3f(1, 0, 0)
         glVertex(self.bottom, self.right, 0)
-        glColor3f(0, 1, 0)
         glVertex(self.top, self.right, 0)
-        glColor3f(0, 0, 1)
         glVertex(self.top, self.left, 0)
         glEnd()
 
@@ -47,6 +45,10 @@ class car:
         # 1- Translate to Origin
         # 2- Rotate around z-Axis
         # 3- Translate Back
+        if self.collosion:
+            self.currSpeed = - self.currSpeed
+            self.speed = 0
+            self.collosion = False
         glLoadIdentity()
         cen = self.center()
         glTranslate(cen[0], cen[1], 0)
@@ -89,6 +91,7 @@ class car:
 
     def sound(self):
         return
+
     def get_vertices(self):
         # Step 1: Calculate the center of the car
         center = self.center()
@@ -104,7 +107,7 @@ class car:
         # Steps 3-5: Move the car to the origin, rotate, and move back
         theta = radians(self.rotAngle)
         rot_matrix = [[cos(theta), -sin(theta)],
-                    [sin(theta), cos(theta)]]
+                      [sin(theta), cos(theta)]]
 
         rotated_vertices = []
         for vertex in vertices:
@@ -121,7 +124,5 @@ class car:
             rotated_vertex[0] += center[0]
             rotated_vertex[1] += center[1]
             rotated_vertices.append(rotated_vertex)
-
         # Step 6: Return the rotated vertices
         return rotated_vertices
-

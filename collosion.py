@@ -25,6 +25,10 @@ def test_wall_car(walls, carModel):
     return False
 
 
+def test_car_rect(carModel, rects):
+    return
+
+
 def ccw(A, B, C):
     return (C.y-A.y) * (B.x-A.x) > (B.y-A.y) * (C.x-A.x)
 

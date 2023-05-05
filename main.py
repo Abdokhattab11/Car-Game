@@ -25,6 +25,8 @@ def display():
         carModel.collosion = True
     glPushMatrix()
     draw_map()
+    s = "Health : " + str(carModel.health)
+    print_text(s, 20, WINDOW_HEIGHT-20)
     glPopMatrix()
 
     glPushMatrix()
@@ -37,6 +39,16 @@ def display():
 def Timer(v):
     display()
     glutTimerFunc(PERIOD, Timer, 1)
+
+
+def print_text(s, x, y):
+    glLineWidth(2)
+    glColor3f(1, 1, 0)
+    glTranslate(x, y, 0)
+    glScale(0.15, 0.15, 1)
+    s = s.encode()
+    for char in s:
+        glutStrokeCharacter(GLUT_STROKE_ROMAN, char)
 
 
 def keyboard(key, x, y):

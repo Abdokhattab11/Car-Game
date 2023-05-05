@@ -15,6 +15,7 @@ class car:
         self.top = 80
         # Car State
         self.health = 100
+        self.coins = 0
         self.light = False
         # Car Pyhsics
         self.rot = 0  # is am rotating or not -->> can be 1 or -1
@@ -46,6 +47,7 @@ class car:
         # 2- Rotate around z-Axis
         # 3- Translate Back
         if self.collosion:
+            self.health -= 10
             self.currSpeed = - self.currSpeed
             self.speed = 0
             self.collosion = False

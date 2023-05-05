@@ -3,6 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from maze import *
 from car import *
+from collision import *
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
@@ -35,19 +36,26 @@ def display():
 
 def Timer(v):
     display()
+    if detect_collision(carModel,lst_of_lines) and carModel.currSpeed >= 0.01 :
+        carModel.speed = -carModel.speed
+        carModel.currSpeed *= -0.65 
+        carModel.health -= carModel.currSpeed * 20
+    print (carModel.currSpeed)
+    print(carModel.speed)
+    print(detect_collision(carModel,lst_of_lines))
     glutTimerFunc(PERIOD, Timer, 1)
 
 
 def keyboard(key, x, y):
     global carModel
-    if key == b"w":
+    if key == b"w": 
         carModel.speed = 1.5   # <----------------------- This is the edit of speed
     if key == b"s":
         carModel.speed = -1.5
     if key == b"d":
         carModel.rot = -1.5  # to make it smooth
     if key == b"a":
-        carModel.rot = 1.5  # to make it aasmooth
+        carModel.rot = 1.5  # to make it smooth
     if key == b" ":
         carModel.currSpeed = 0
         carModel.speed = 0

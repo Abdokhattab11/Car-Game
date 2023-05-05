@@ -14,7 +14,7 @@ class car:
         self.right = 80
         self.top = 50
         # Car State
-        self.health = 0
+        self.health = 100
         self.light = False
         # Car Pyhsics
         self.rot = 0  # is am rotating or not -->> can be 1 or -1
@@ -86,3 +86,37 @@ class car:
 
     def sound(self):
         return
+    def get_vertices(self):
+        # Step 1: Calculate the center of the car
+        center = self.center()
+
+        # Step 2: Calculate the four vertices of the car
+        vertices = [
+            [self.left, self.bottom],
+            [self.right, self.bottom],
+            [self.right, self.top],
+            [self.left, self.top],
+        ]
+
+        # Steps 3-5: Move the car to the origin, rotate, and move back
+        rot_matrix = [[cos(self.rotAngle), -sin(self.rotAngle)],
+                    [sin(self.rotAngle), cos(self.rotAngle)]]
+        rotated_vertices = []
+        for vertex in vertices:
+            # Move to origin
+            moved_vertex = [vertex[0] - center[0], vertex[1] - center[1]]
+
+            # Rotate around z-axis
+            rotated_vertex = [0, 0]
+            for i in range(2):
+                for j in range(2):
+                    rotated_vertex[i] += rot_matrix[i][j] * moved_vertex[j]
+
+            # Move back
+            rotated_vertex[0] += center[0]
+            rotated_vertex[1] += center[1]
+            rotated_vertices.append(rotated_vertex)
+
+        # Step 6: Return the rotated vertices
+        return rotated_vertices
+

@@ -15,11 +15,11 @@ class line:
 
 
 class box:
-    def __init__(self, bottom, right, top, left):
-        self.bottom = left
-        self.right = bottom
-        self.top = right
-        self.left = top
+    def __init__(self, left, bottom, right, top):
+        self.left = left
+        self.bottom = bottom
+        self.right = right
+        self.top = top
         self.collected = False
 
     def draw(self):
@@ -33,10 +33,10 @@ class box:
 
     def get_vertices(self):
         vertices = [
-            [self.bottom, self.left],
-            [self.bottom, self.right],
-            [self.top, self.right],
-            [self.top, self.left],
+            [self.left, self.top],
+            [self.left, self.bottom],
+            [self.right, self.bottom],
+            [self.right, self.top],
         ]
         return vertices
 

@@ -14,7 +14,6 @@ WINDOW_HEIGHT = 700
 PERIOD = 10
 
 carModel = car()
-bombs = [box(350, 100, 400, 150)]
 
 def init_proj():
     glClearColor(0, 0, 0, 0)

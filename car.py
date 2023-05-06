@@ -66,9 +66,9 @@ class car:
         self.top = self.top + cos(theta)*self.currSpeed
         self.bottom = self.bottom + cos(theta)*self.currSpeed
 
-        # Case 1 : if car has speed to be reaced
+        # Case 1 : if car has speed to be increased
         if self.speed != 0:
-            if abs(self.currSpeed - self.speed) <= 0.1:  # to avoid floating prection
+            if abs(self.currSpeed - self.speed) <= 0.1 and abs(self.speed) == 1.5 :  # to avoid floating prection
                 self.currSpeed = self.speed
             elif self.currSpeed < self.speed:
                 self.currSpeed += self.forwardAcc
@@ -89,6 +89,7 @@ class car:
 
     def sound(self):
         return
+    
     def get_vertices(self):
         # Step 1: Calculate the center of the car
         center = self.center()

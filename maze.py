@@ -24,7 +24,6 @@ class box:
 
     def draw(self):
         if self.collected == False:
-            glColor3f(1,1,1)
             glBegin(GL_POLYGON)
             glVertex(self.left, self.bottom, 0)
             glVertex(self.right, self.bottom, 0)
@@ -59,6 +58,8 @@ bombs1 =[]
 coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,540,70,560),box(50,630,70,650),
           box(225,440,245,460),box(375,440,395,460),box(750,440,770,460),box(525,40,545,60),box(675,540,695,560),
           box(1125,140,1145,160),box(1125,440,1145,460),box(850,340,870,360),box(975,640,995,660),box(500,240,520,260)]
+
+
 def draw_line(line: line):
     glColor3f(1, 0, 0)
     glLineWidth(4)
@@ -73,6 +74,7 @@ def draw_map():
         draw_line(maze1[i])
 
 def draw_coins():
+    glColor3f(1, 1, 0)
     for i in coins1:
         i.draw()
 

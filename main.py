@@ -28,6 +28,14 @@ def display():
     glPopMatrix()
 
     glPushMatrix()
+    if detect_collision(carModel,lst_of_lines) :
+        if (carModel.currSpeed >= 0.01 and carModel.speed == 1.5) or (carModel.currSpeed <= -0.01 and carModel.speed == -1.5):
+            carModel.currSpeed *= -0.65 
+            carModel.speed = 0
+            carModel.health -= carModel.currSpeed * 20
+    print(carModel.currSpeed)
+    print(carModel.speed)
+    print(detect_collision(carModel,lst_of_lines))
     carModel.animation()
     carModel.draw()
     glPopMatrix()
@@ -36,13 +44,7 @@ def display():
 
 def Timer(v):
     display()
-    if detect_collision(carModel,lst_of_lines) and carModel.currSpeed >= 0.01 :
-        carModel.speed = -carModel.speed
-        carModel.currSpeed *= -0.65 
-        carModel.health -= carModel.currSpeed * 20
-    print (carModel.currSpeed)
-    print(carModel.speed)
-    print(detect_collision(carModel,lst_of_lines))
+
     glutTimerFunc(PERIOD, Timer, 1)
 
 

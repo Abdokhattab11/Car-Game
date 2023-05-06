@@ -10,7 +10,6 @@ PERIOD = 10
 
 carModel = car()
 Box = box(350, 100, 400, 150)
-collosion = Collosion()
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -22,7 +21,7 @@ def init_proj():
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    if collosion.line_polygon_intersect(lst_of_lines, carModel):
+    if test_car_walls(carModel, maze1):
         carModel.collosion = True
     #if collosionModeltest_car_box(carModel, Box):
      #   os._exit(0)

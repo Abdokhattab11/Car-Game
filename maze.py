@@ -20,14 +20,16 @@ class box:
         self.bottom = bottom
         self.right = right
         self.top = top
+        self.collected = False
 
     def draw(self):
-        glBegin(GL_POLYGON)
-        glVertex(self.left, self.bottom, 0)
-        glVertex(self.right, self.bottom, 0)
-        glVertex(self.right, self.top, 0)
-        glVertex(self.left, self.top, 0)
-        glEnd()
+        if self.collected == False:
+            glBegin(GL_POLYGON)
+            glVertex(self.left, self.bottom, 0)
+            glVertex(self.right, self.bottom, 0)
+            glVertex(self.right, self.top, 0)
+            glVertex(self.left, self.top, 0)
+            glEnd()
 
     def get_vertices(self):
         vertices = [
@@ -39,7 +41,7 @@ class box:
         return vertices
 
 
-lst_of_lines = [line(0, 100, 300, 100), line(
+maze1 = [line(0, 100, 300, 100), line(
     150, 200, 150, 600), line(0, 600, 150, 600),
     line(300, 200, 300, 600), line(300, 200, 900, 200),
     line(450, 300, 900, 300), line(600, 400, 900, 400),
@@ -62,8 +64,8 @@ def draw_line(line: line):
 
 
 def draw_map():
-    for i in range(len(lst_of_lines)):
-        draw_line(lst_of_lines[i])
+    for i in range(len(maze1)):
+        draw_line(maze1[i])
 
 
 def draw_grid():

@@ -3,6 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from maze import *
 from car import *
+from collision import *
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
@@ -18,14 +19,14 @@ def init_proj():
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
+cnt =1
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-
     glPushMatrix()
     draw_map()
+    draw_rects()
     glPopMatrix()
-
     glPushMatrix()
     carModel.animation()
     carModel.draw()
@@ -33,21 +34,27 @@ def display():
     glutSwapBuffers()
 
 
+
 def Timer(v):
+    global cnt
     display()
+    if detect_collision(carModel,lst_of_lines):
+        carModel.currSpeed *= -1
+        # print("collision ", cnt)
+        # cnt = cnt + 1
     glutTimerFunc(PERIOD, Timer, 1)
 
 
 def keyboard(key, x, y):
     global carModel
-    if key == b"w":
+    if key == b"w": 
         carModel.speed = 1.5   # <----------------------- This is the edit of speed
     if key == b"s":
         carModel.speed = -1.5
     if key == b"d":
         carModel.rot = -1.5  # to make it smooth
     if key == b"a":
-        carModel.rot = 1.5  # to make it aasmooth
+        carModel.rot = 1.5  # to make it smooth
     if key == b" ":
         carModel.currSpeed = 0
         carModel.speed = 0

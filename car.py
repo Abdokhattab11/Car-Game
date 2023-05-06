@@ -9,10 +9,10 @@ import pygame
 class car:
     def __init__(self):
         # Coordinates
-        self.left = 20
+        self.left = 50
         self.bottom = 20
-        self.right = 80
-        self.top = 50
+        self.right = 20
+        self.top = 80
         # Car State
         self.health = 100
         self.light = False
@@ -29,14 +29,17 @@ class car:
     def draw(self):
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
-        glVertex(self.left, self.bottom, 0)
-        glVertex(self.right, self.bottom, 0)
-        glVertex(self.right, self.top, 0)
-        glVertex(self.left, self.top, 0)
+        glVertex(self.bottom, self.left, 0)
+        glColor3f(1, 0, 0)
+        glVertex(self.bottom, self.right, 0)
+        glColor3f(0, 1, 0)
+        glVertex(self.top, self.right, 0)
+        glColor3f(0, 0, 1)
+        glVertex(self.top, self.left, 0)
         glEnd()
 
     def center(self):
-        return [(self.left + self.right)/2, (self.top + self.bottom)/2]
+        return [(self.top + self.bottom)/2, (self.left + self.right)/2]
 
     def animation(self):
         # First of all we need to adjust rotation
@@ -53,15 +56,15 @@ class car:
         # Now we need to adjust the Vertices
         theta = self.rotAngle*(pi/180)
 
-        # Delta in x direction is proportional to Cos(theta) and currspeed
+        # Delta in x direction is proportional to Sin(theta) and currspeed
         # The greater currentspeed , the greater the shift
-        self.left = self.left + cos(theta)*self.currSpeed
-        self.right = self.right + cos(theta)*self.currSpeed
+        self.left = self.left + sin(theta)*self.currSpeed
+        self.right = self.right + sin(theta)*self.currSpeed
 
         # Delta in x direction is proportional to Cos(theta) and currspeed
         # The greater currentspeed , the greater the shift
-        self.top = self.top + sin(theta)*self.currSpeed
-        self.bottom = self.bottom + sin(theta)*self.currSpeed
+        self.top = self.top + cos(theta)*self.currSpeed
+        self.bottom = self.bottom + cos(theta)*self.currSpeed
 
         # Case 1 : if car has speed to be reaced
         if self.speed != 0:
@@ -92,15 +95,17 @@ class car:
 
         # Step 2: Calculate the four vertices of the car
         vertices = [
-            [self.left, self.bottom],
-            [self.right, self.bottom],
-            [self.right, self.top],
-            [self.left, self.top],
+            [self.bottom, self.left],
+            [self.bottom, self.right],
+            [self.top, self.right],
+            [self.top, self.left],
         ]
 
         # Steps 3-5: Move the car to the origin, rotate, and move back
-        rot_matrix = [[cos(self.rotAngle), -sin(self.rotAngle)],
-                    [sin(self.rotAngle), cos(self.rotAngle)]]
+        theta = radians(self.rotAngle)
+        rot_matrix = [[cos(theta), -sin(theta)],
+                    [sin(theta), cos(theta)]]
+
         rotated_vertices = []
         for vertex in vertices:
             # Move to origin

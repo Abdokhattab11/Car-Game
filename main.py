@@ -27,17 +27,21 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT)
     if test_car_walls(carModel, maze1):
         carModel.collosion = True
-    if test_car_bomb(carModel, bombs):
-        print("BOMB")
-    glPushMatrix()
+    if test_car_bomb(carModel, bombs1):
+        carModel.health = 0
+    if test_car_coin(carModel, coins1):
+        carModel.coins += 1
+    
     draw_map()
+    draw_coins()
+    glPushMatrix()
     s = "Health : " + str(carModel.health)
     print_text(s, 20, WINDOW_HEIGHT-20)
-
     glPopMatrix()
 
     glPushMatrix()
-    bombs[0].draw()
+    s = "Coins : " + str(carModel.coins)
+    print_text(s,20,WINDOW_HEIGHT - 40)
     glPopMatrix()
 
     glPushMatrix()
@@ -45,8 +49,6 @@ def display():
     carModel.draw()
     glPopMatrix()
     glutSwapBuffers()
-    print(carModel.get_vertices())
-    print(bombs[0].get_vertices())
 
 
 def Timer(v):
@@ -58,7 +60,7 @@ def print_text(s, x, y):
     glLineWidth(2)
     glColor3f(1, 1, 0)
     glTranslate(x, y, 0)
-    glScale(0.15, 0.15, 1)
+    glScale(0.1, 0.1, 1)
     s = s.encode()
     for char in s:
         glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, char)

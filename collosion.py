@@ -101,18 +101,20 @@ def test_car_walls(carModel, walls):
 def test_car_coin(carModel, coins):
     carVertices = carModel.get_vertices()
     for i in coins:
+        if i.collected == True:
+            continue
         coinVertices = i.get_vertices()
         if col.two_polygon_intersect(carVertices,coinVertices):
             i.collected = True
+            return True
+    return False
 
 def test_car_bomb(carModel,bombs):
     carVertices = carModel.get_vertices()
     for i in bombs:
         bombVertices = i.get_vertices()
         if col.two_polygon_intersect(carVertices,bombVertices) == True:
-            # There is a collosion
-            i.collected = True
-            carModel.health = 0
+                
             return True
     return False
 

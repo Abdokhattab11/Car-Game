@@ -1,6 +1,7 @@
 from math import *
 import sys
 
+OO = 10000000
 class point:
     def __init__(self, x, y):
         self.x = x
@@ -40,63 +41,53 @@ class Collosion:
     
     def two_polygon_intersect(self, VerticesA ,VerticesB):
         """
-        we use Seperating Axis algrithm Here
-        return True of Two polygon intersect 
+        Vertices : 2D List , Vertices[i][0] -> x, Vertices[i][1] -> y
         """
-        # First we need to get all edges from two shapse
+        # First we need to find all edges in shape A
         n = len(VerticesA)
         for i in range(n):
-            p1 = point(VerticesA[i][0], VerticesA[i][1])
-            p2 = point(VerticesA[(i+1)%n][0], VerticesA[(i+1)%n][1])
-            # To get normal Axis : https://stackoverflow.com/questions/1243614/how-do-i-calculate-the-normal-vector-of-a-line-segment
-            axis = point(-(p2.y - p1.y), (p2.x - p1.x))
-            # We need to get the unit vector of axis
-            val = sqrt(axis.x**2+axis.y**2)
-            if val != 0:
-                axis.x = axis.x / val
-                axis.y = axis.y / val
-            mnA,mxA = sys.maxsize,-sys.maxsize
-            self.projectVertices(VerticesA,axis,mnA,mxA)
-            mnB,mxB = sys.maxsize,-sys.maxsize
-            self.projectVertices(VerticesB,axis,mnB,mxB)
-            # Test Separating axis
-            if mnA <= mnB <= mxA and mnA <= mxB <= mxA:
-                continue
-            else:
-                # There's a separating axis
+            p1 = VerticesA[i]
+            p2 = VerticesA[(i+1) % n]
+            axis = self.get_unit_normal_vector(p1,p2)
+            # for Each Axis we need to project all points from shape A, and all points from shape B , then compare
+            projA = self.projectVertices(VerticesA, axis)
+            projB = self.projectVertices(VerticesB, axis)
+            #There's a gap if (maxB < minA) or (maxA < minB) -->> return False No intersection
+            if projB[1] < projA[0] or projA[1] < projB[0]:
                 return False
-        # Repeat the same process for edges in B 
         n = len(VerticesB)
         for i in range(n):
-            p1 = point(VerticesB[i][0], VerticesB[i][1])
-            p2 = point(VerticesB[(i+1)%n][0], VerticesB[(i+1)%n][1])
-            axis = point(-(p2.y - p1.y), (p2.x - p1.x))
-            # We need to get the unit vector of axis
-            val = sqrt(axis.x**2+axis.y**2)
-            if val != 0:
-                axis.x = axis.x / val
-                axis.y = axis.y / val
-            mnA,mxA = sys.maxsize,-sys.maxsize
-            self.projectVertices(VerticesA,axis,mnA,mxA)
-            mnB,mxB = sys.maxsize,-sys.maxsize
-            self.projectVertices(VerticesB,axis,mnB,mxB)
-            # Test Separating axis
-            if mnA <= mnB <= mxA and mnA <= mxB <= mxA:
-                continue
-            else:
-                # There's a separating axis
+            p1 = VerticesB[i]
+            p2 = VerticesB[(i+1) % n]
+            axis = self.get_unit_normal_vector(p1,p2)
+            # for Each Axis we need to project all points from shape A, and all points from shape B , then compare
+            projA = self.projectVertices(VerticesA, axis)
+            projB = self.projectVertices(VerticesB, axis)
+            #There's a gap if (maxB < minA) or (maxA < minB) -->> return False No intersection
+            if projB[1] < projA[0] or projA[1] < projB[0]:
                 return False
-        # No separating axis , so they are intersected
         return True
+            
 
-    def projectVertices(self,vertices,axis,mn,mx):
-        for i in vertices:
-            # To get the projection of a vertix on axis : just fo dot product
-            proj = i[0]*axis.x + i[1] * axis.y
-            if proj > mx:
-                mx = proj
-            if proj < mn:
-                mn = proj
+    def projectVertices(self,vertices,axis):
+        minA, maxA = OO, -OO
+        # to project point on axis , just do dot product
+        for v in vertices:
+            proj = axis[0]*v[0] + axis[1]*v[1]
+            if proj < minA:
+                minA = proj
+            if proj > maxA:
+                maxA = proj
+        return (minA,maxA)
+    
+    def get_unit_normal_vector(self,p1,p2):
+        dx = p2[0] - p1[0]
+        dy = p2[1] - p1[1]
+        magnitude = sqrt(dx**2 + dy**2)
+        if magnitude != 0: # To avoid division by zero
+            dx = dx/magnitude
+            dy = dy/magnitude
+        return [-dy,dx]
 
 col = Collosion()
 
@@ -118,6 +109,30 @@ def test_car_bomb(carModel,bombs):
     carVertices = carModel.get_vertices()
     for i in bombs:
         bombVertices = i.get_vertices()
-        if col.two_polygon_intersect(carVertices,bombVertices):
+        if col.two_polygon_intersect(carVertices,bombVertices) == True:
+            # There is a collosion
             i.collected = True
             carModel.health = 0
+            return True
+    return False
+
+        
+if __name__ == "__main__":
+    c = Collosion()
+    if c.two_polygon_intersect([[0,0],[10,0],[10,10],[0,10]], [[20,0],[30,0],[30,10],[20,10]]) == False:
+        print("True")
+    else:
+        print("Expected True output False")
+    if c.two_polygon_intersect([[0,0],[10,0],[10,10],[0,10]], [[5,0],[15,0],[15,10],[5,10]]) == True: 
+        print("True")
+    else:
+        print("Expected True output False")
+    if c.two_polygon_intersect([[20.0, 50.0], [20.0, 20.0], [80.0, 20.0], [80.0, 50.0]], [[100, 350], [100, 400], [150, 400], [150, 350]]) == False:
+        print("True")
+    else:
+        print("Expected True output False")
+    if c.two_polygon_intersect([[327.8437342690493, 68.23378448111289], [354.661908380755, 54.78813323938297], [381.5532108642146, 108.42448146279385], [354.7350367525089, 121.87013270452377]], [[100, 350], [100, 400], [150, 400], [150, 350]]) == True: 
+        print("True")
+    else:
+        print("Expected True output False")
+    

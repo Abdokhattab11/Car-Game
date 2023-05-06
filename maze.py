@@ -15,11 +15,11 @@ class line:
 
 
 class box:
-    def __init__(self, left, bottom, right, top):
-        self.left = left
-        self.bottom = bottom
-        self.right = right
-        self.top = top
+    def __init__(self, bottom, right, top, left):
+        self.bottom = left
+        self.right = bottom
+        self.top = right
+        self.left = top
         self.collected = False
 
     def draw(self):

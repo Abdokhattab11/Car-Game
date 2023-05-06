@@ -1,3 +1,8 @@
+import os
+try:
+    del os.environ['DISPLAY']
+except:
+    pass
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -9,7 +14,7 @@ WINDOW_HEIGHT = 700
 PERIOD = 10
 
 carModel = car()
-Box = box(350, 100, 400, 150)
+bombs = [box(350, 100, 400, 150)]
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -23,8 +28,8 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT)
     if test_car_walls(carModel, maze1):
         carModel.collosion = True
-    #if collosionModeltest_car_box(carModel, Box):
-     #   os._exit(0)
+    if test_car_bomb(carModel, bombs):
+        print("BOMB")
     glPushMatrix()
     draw_map()
     s = "Health : " + str(carModel.health)
@@ -33,7 +38,7 @@ def display():
     glPopMatrix()
 
     glPushMatrix()
-    Box.draw()
+    bombs[0].draw()
     glPopMatrix()
 
     glPushMatrix()
@@ -41,7 +46,8 @@ def display():
     carModel.draw()
     glPopMatrix()
     glutSwapBuffers()
-    print(carModel.currSpeed, carModel.speed)
+    print(carModel.get_vertices())
+    print(bombs[0].get_vertices())
 
 
 def Timer(v):
@@ -56,7 +62,7 @@ def print_text(s, x, y):
     glScale(0.15, 0.15, 1)
     s = s.encode()
     for char in s:
-        glutStrokeCharacter(GLUT_STROKE_ROMAN, char)
+        glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, char)
 
 
 def keyboard(key, x, y):

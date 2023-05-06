@@ -21,6 +21,14 @@ class box:
         self.right = right
         self.top = top
 
+    def draw(self):
+        glBegin(GL_POLYGON)
+        glVertex(self.left, self.bottom, 0)
+        glVertex(self.right, self.bottom, 0)
+        glVertex(self.right, self.top, 0)
+        glVertex(self.left, self.top, 0)
+        glEnd()
+
     def get_vertices(self):
         vertices = [
             [self.bottom, self.left],

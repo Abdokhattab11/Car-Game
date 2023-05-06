@@ -9,7 +9,8 @@ WINDOW_HEIGHT = 700
 PERIOD = 10
 
 carModel = car()
-
+Box = box(350, 100, 400, 150)
+collosion = Collosion()
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -21,12 +22,19 @@ def init_proj():
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    if test_wall_car(lst_of_lines, carModel):
+    if collosion.line_polygon_intersect(lst_of_lines, carModel):
         carModel.collosion = True
+    #if collosionModeltest_car_box(carModel, Box):
+     #   os._exit(0)
     glPushMatrix()
     draw_map()
     s = "Health : " + str(carModel.health)
     print_text(s, 20, WINDOW_HEIGHT-20)
+
+    glPopMatrix()
+
+    glPushMatrix()
+    Box.draw()
     glPopMatrix()
 
     glPushMatrix()

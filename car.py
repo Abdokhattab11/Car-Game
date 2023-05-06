@@ -96,6 +96,7 @@ class car:
         return
 
     def get_vertices(self):
+        # return type is a list
         # Step 1: Calculate the center of the car
         center = self.center()
 

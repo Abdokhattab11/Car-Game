@@ -25,10 +25,6 @@ def test_wall_car(walls, carModel):
     return False
 
 
-def test_car_rect(carModel, rects):
-    return
-
-
 def ccw(A, B, C):
     return (C.y-A.y) * (B.x-A.x) > (B.y-A.y) * (C.x-A.x)
 
@@ -37,3 +33,35 @@ def ccw(A, B, C):
 
 def intersect(A, B, C, D):
     return ccw(A, C, D) != ccw(B, C, D) and ccw(A, B, C) != ccw(A, B, D)
+
+
+# Normal equation : y = n*x + d , n = -1/m , m is slope, we can ignore d , as we only need to project points
+# We need to project points of Shape A on normal axis and get min and max point
+# and project also points of Shape B on normal axis and get min and max point
+# Then Test if they are overlapping or not
+# They overlap if (Amin <= Bmin <= Amax) or (Amin <= Bmax <= Amax)
+
+# First Step : We need to Find normals of each line
+# for Each point in shape A project it in curr Normal
+# for Each point in shape B project it in curr Normal
+
+def sat(carModel, box):
+    carPoints = carModel.get_vertices()
+    boxPoints = box.get_vertices()
+    normals = get_normals(carPoints)
+    normals = normals + get_normals(boxPoints)
+    for n in normals:
+        # For Each Line 1- Project د
+        return
+
+
+def get_normals(points):
+    # Take Each two consecative points and from
+    res = []
+    n = len(points)
+    for i in range(n):
+        x1, y1 = points[i][0], points[i][1]
+        x2, y2 = points[(i+1) % n][0], points[(i+1) % n][1]
+        n = -1*(x1-x2)/(y1-y2)
+        res.append(n)
+    return n

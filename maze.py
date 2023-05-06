@@ -14,6 +14,23 @@ class line:
         self.vertical = (x1 == x2)
 
 
+class box:
+    def __init__(self, left, bottom, right, top):
+        self.left = left
+        self.bottom = bottom
+        self.right = right
+        self.top = top
+
+    def get_vertices(self):
+        vertices = [
+            [self.bottom, self.left],
+            [self.bottom, self.right],
+            [self.top, self.right],
+            [self.top, self.left],
+        ]
+        return vertices
+
+
 lst_of_lines = [line(0, 100, 300, 100), line(
     150, 200, 150, 600), line(0, 600, 150, 600),
     line(300, 200, 300, 600), line(300, 200, 900, 200),

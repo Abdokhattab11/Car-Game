@@ -47,8 +47,9 @@ class car:
         # 2- Rotate around z-Axis
         # 3- Translate Back
         if self.collosion:
-            self.health -= 10
-            self.currSpeed = - self.currSpeed
+            self.health -= int(10*abs(self.currSpeed))
+            sign1 = 1 if self.currSpeed > 0 else -1
+            self.currSpeed = - (self.currSpeed) - 0.15*sign1
             self.speed = 0
             self.collosion = False
         glLoadIdentity()

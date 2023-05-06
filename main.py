@@ -34,6 +34,7 @@ def display():
     carModel.draw()
     glPopMatrix()
     glutSwapBuffers()
+    print(carModel.currSpeed, carModel.speed)
 
 
 def Timer(v):
@@ -54,11 +55,13 @@ def print_text(s, x, y):
 def keyboard(key, x, y):
     global carModel
     if key == b"w":
-        carModel.speed = 1.5   # <----------------------- This is the edit of speed
+        carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
+        carModel.dir = 1
     if key == b"s":
         carModel.speed = -1.5
+        carModel.dir = -1
     if key == b"d":
-        carModel.rot = -1.5  # to make it smooth
+        carModel.rot = -1.5  # to make it smooths
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
@@ -70,6 +73,7 @@ def keyboardup(key, x, y):
     global carModel
     if key == b"w" or key == b"s":
         carModel.speed = 0
+        carModel.dir = 0
     if key == b"d" or key == b"a":
         carModel.rot = 0
 

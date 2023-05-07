@@ -33,8 +33,8 @@ def display():
         carModel.health = 0
     if test_car_coin(carModel, coins1):
         carModel.coins += 1
-    #if carModel.health < 0:
-    #    os._exit(0)
+    if carModel.health < 0:
+        os._exit(0)
 
     draw_map()
     draw_coins()

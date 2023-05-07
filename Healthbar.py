@@ -28,5 +28,5 @@ def draw_health_bar(health):
     glPopMatrix()
 
 def draw_health(health):
-    draw_white_bar()
     draw_health_bar(health)
+    draw_white_bar()

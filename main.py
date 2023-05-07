@@ -22,10 +22,11 @@ def init_proj():
     glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
+    glEnable(GL_DEPTH_TEST)
 
 
 def display():
-    glClear(GL_COLOR_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     if test_car_walls(carModel, maze1):
         carModel.collosion = True
     if test_car_bomb(carModel, bombs1):
@@ -39,14 +40,14 @@ def display():
     draw_coins()
     
     glPushMatrix()
-    glTranslate(-20,0,0)
+    glTranslate(-20,5,0)
     draw_health(carModel.health)
     glPopMatrix()
 
-    #glPushMatrix()
-    #s = "Coins : " + str(carModel.coins)
-    #print_text(s,20,WINDOW_HEIGHT - 40)
-    #glPopMatrix()
+    glPushMatrix()
+    s = "Coins : " + str(carModel.coins)
+    print_text(s,20,WINDOW_HEIGHT - 40)
+    glPopMatrix()
 
     glPushMatrix()
     carModel.animation()
@@ -101,7 +102,7 @@ if __name__ == "__main__":
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT)
     glutInitWindowPosition(50, 50)
     glutCreateWindow(b"Need For Speed")
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA|GLUT_DEPTH)
     glutDisplayFunc(display)
     glutTimerFunc(PERIOD, Timer, 1)
     glutKeyboardFunc(keyboard)

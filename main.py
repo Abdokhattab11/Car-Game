@@ -9,6 +9,7 @@ from OpenGL.GLUT import *
 from maze import *
 from car import *
 from collosion import *
+from Healthbar import *
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
 PERIOD = 10
@@ -16,7 +17,7 @@ PERIOD = 10
 carModel = car()
 
 def init_proj():
-    glClearColor(0, 0, 0, 0)
+    glClearColor(0.2, 0.2, 0.2, 0)
     glMatrixMode(GL_PROJECTION)
     glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
     glMatrixMode(GL_MODELVIEW)
@@ -31,18 +32,21 @@ def display():
         carModel.health = 0
     if test_car_coin(carModel, coins1):
         carModel.coins += 1
-    
+    if carModel.health < 0:
+        os._exit(0)
+
     draw_map()
     draw_coins()
+    
     glPushMatrix()
-    s = "Health : " + str(carModel.health)
-    print_text(s, 20, WINDOW_HEIGHT-20)
+    glTranslate(-20,0,0)
+    draw_health(carModel.health)
     glPopMatrix()
 
-    glPushMatrix()
-    s = "Coins : " + str(carModel.coins)
-    print_text(s,20,WINDOW_HEIGHT - 40)
-    glPopMatrix()
+    #glPushMatrix()
+    #s = "Coins : " + str(carModel.coins)
+    #print_text(s,20,WINDOW_HEIGHT - 40)
+    #glPopMatrix()
 
     glPushMatrix()
     carModel.animation()

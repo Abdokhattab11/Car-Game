@@ -1,7 +1,7 @@
 from math import *
 import sys
 
-OO = 10000000
+OO = 1000000000
 class point:
     def __init__(self, x, y):
         self.x = x
@@ -114,7 +114,6 @@ def test_car_bomb(carModel,bombs):
     for i in bombs:
         bombVertices = i.get_vertices()
         if col.two_polygon_intersect(carVertices,bombVertices) == True:
-                
             return True
     return False
 
@@ -133,7 +132,7 @@ if __name__ == "__main__":
         print("True")
     else:
         print("Expected True output False")
-    if c.two_polygon_intersect([[327.8437342690493, 68.23378448111289], [354.661908380755, 54.78813323938297], [381.5532108642146, 108.42448146279385], [354.7350367525089, 121.87013270452377]], [[100, 350], [100, 400], [150, 400], [150, 350]]) == True: 
+    if c.two_polygon_intersect([[327.8437342690493, 68.23378448111289], [354.661908380755, 54.78813323938297], [381.5532108642146, 108.42448146279385], [354.7350367525089, 121.87013270452377]], [[100, 350], [100, 400], [150, 400], [150, 350]]) == False: 
         print("True")
     else:
         print("Expected True output False")

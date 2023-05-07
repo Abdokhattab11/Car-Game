@@ -42,17 +42,18 @@ class car:
         return [(self.right + self.left)/2, (self.top + self.bottom)/2]
 
     def animation(self):
+        if self.collosion:
+            self.health -= int(10*abs(self.currSpeed)) # Health decrease proportoinal to currSpeed
+            sign1 = 1 if self.currSpeed > 0 else -1
+            self.currSpeed = - 0.8*(self.currSpeed) - 0.15*sign1 # collsion in opposite direction
+            self.speed = 0 # make final speed = 0
+            self.collosion = False 
+        
         # First of all we need to adjust rotation
         # To make car rotate around it self we need to do :
         # 1- Translate to Origin
         # 2- Rotate around z-Axis
         # 3- Translate Back
-        if self.collosion:
-            self.health -= int(10*abs(self.currSpeed))
-            sign1 = 1 if self.currSpeed > 0 else -1
-            self.currSpeed = - (self.currSpeed) - 0.15*sign1
-            self.speed = 0
-            self.collosion = False
         glLoadIdentity()
         cen = self.center()
         glTranslate(cen[0], cen[1], 0)
@@ -62,7 +63,7 @@ class car:
         # Now we need to adjust the Vertices
         theta = self.rotAngle*(pi/180)
 
-        # Delta in x direction is proportional to Sin(theta) and currspeed
+        # Delta in y direction is proportional to Sin(theta) and currspeed
         # The greater currentspeed , the greater the shift
         self.top = self.top + sin(theta)*self.currSpeed
         self.bottom = self.bottom + sin(theta)*self.currSpeed

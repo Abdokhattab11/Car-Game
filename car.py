@@ -2,6 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from math import *
+from texture import *
 from numpy import sign
 import pygame
 
@@ -30,13 +31,23 @@ class car:
         self.collosion = False
 
     def draw(self):
+        glBindTexture(GL_TEXTURE_2D,CAR)
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
+        glTexCoord(0,1)
         glVertex(self.left, self.top, 0)
+
+        glTexCoord(0,0)
         glVertex(self.left, self.bottom, 0)
+
+        glTexCoord(1,0)
         glVertex(self.right, self.bottom, 0)
+
+        glTexCoord(1,1)
         glVertex(self.right, self.top, 0)
         glEnd()
+
+        glBindTexture(GL_TEXTURE_2D, -1)
 
     def center(self):
         return [(self.right + self.left)/2, (self.top + self.bottom)/2]

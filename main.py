@@ -10,6 +10,7 @@ from maze import *
 from car import *
 from collosion import *
 from Healthbar import *
+from texture import *
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
 PERIOD = 10
@@ -23,6 +24,9 @@ def init_proj():
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     glEnable(GL_DEPTH_TEST)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    load_texture()
 
 
 def display():

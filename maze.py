@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-
+from texture import *
 LINE_WIDTH = 10
 
 
@@ -17,21 +17,34 @@ class line:
 
 
 class box:
-    def __init__(self, left, bottom, right, top):
-        self.left = left
-        self.bottom = bottom
-        self.right = right
-        self.top = top
+    def __init__(self, left, bottom, right, top,Type = 0):
+        # Type = 0 -->> coin , Type = 1 -->> bomb , Type = 2 -->> healthkit
+        self.left = left-10
+        self.bottom = bottom-10
+        self.right = right+10
+        self.top = top+10
+        self.type = Type
         self.collected = False
 
     def draw(self):
         if self.collected == False:
+            if self.type == 0:
+                glBindTexture(GL_TEXTURE_2D, STAR)
+            if self.type == 1:
+                return
+            if self.type == 2:
+                return
             glBegin(GL_POLYGON)
+            glTexCoord(0,0)
             glVertex(self.left, self.bottom, 0)
+            glTexCoord(1,0)
             glVertex(self.right, self.bottom, 0)
+            glTexCoord(1,1)
             glVertex(self.right, self.top, 0)
+            glTexCoord(0,1)
             glVertex(self.left, self.top, 0)
             glEnd()
+        glBindTexture(GL_TEXTURE_2D, -1)
 
     def get_vertices(self):
         vertices = [

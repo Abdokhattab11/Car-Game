@@ -55,16 +55,45 @@ def two_lines_intersection(A, B, C, D):
         # intersection point
         x = A[0]
         y = A[1]
+        if (C[0] <= x <= D[0] or D[0] <= x <= C[0]) and (C[1] <= y <= D[1] or D[1] <= y <= C[1]):
+            return True
+        x = B[0]
+        y = B[1]
+        if (C[0] <= x <= D[0] or D[0] <= x <= C[0]) and (C[1] <= y <= D[1] or D[1] <= y <= C[1]):
+            return True
+        return False
+
     else:
         # intersection point
         x = (b2 * c1 - b1 * c2) / determinant
         y = (a1 * c2 - a2 * c1) / determinant
 
     # Check if intersection point is within both line
-    if ((A[0] <= x <= B[0] or B[0] <= x <= A[0]) and
-        (A[1] <= y <= B[1] or B[1] <= y <= A[1]) and
-        (C[0] <= x <= D[0] or D[0] <= x <= C[0]) and
-        (C[1] <= y <= D[1] or D[1] <= y <= C[1])):
-        return True
-    else:
-        return False
+        if ((A[0] <= x <= B[0] or B[0] <= x <= A[0]) and
+            (A[1] <= y <= B[1] or B[1] <= y <= A[1]) and
+            (C[0] <= x <= D[0] or D[0] <= x <= C[0]) and
+            (C[1] <= y <= D[1] or D[1] <= y <= C[1])):
+            return True
+        else:
+            return False
+
+
+def collision_with_polygon(carModel, lst_of_rect):
+    vertices = carModel.get_vertices()
+
+    car_min_x = min(vertices[0][0], vertices[1][0], vertices[2][0], vertices[3][0])
+    car_max_x = max(vertices[0][0], vertices[1][0], vertices[2][0], vertices[3][0])
+
+    car_min_y = min(vertices[0][1], vertices[1][1], vertices[2][1], vertices[3][1])
+    car_max_y = max(vertices[0][1], vertices[1][1], vertices[2][1], vertices[3][1])
+
+    for r in lst_of_rect:
+        if r.show == False:
+            continue
+        if r.left <= car_max_x and r.right >= car_min_x and r.top >= car_min_y and r.bottom <= car_max_y :  # collision with rect
+            r.show = False
+
+            if r.tnt == True :
+                carModel.health -= 20
+            else :
+                carModel.health += 20

@@ -42,6 +42,7 @@ def Timer(v):
         carModel.currSpeed *= -1
         # print("collision ", cnt)
         # cnt = cnt + 1
+    collision_with_polygon(carModel,lst_of_rect)
     glutTimerFunc(PERIOD, Timer, 1)
 
 

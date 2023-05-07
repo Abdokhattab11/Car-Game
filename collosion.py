@@ -10,11 +10,10 @@ class point:
 class Collosion:
     
 
-    def line_polygon_intersect(self,line, rect_vertices):
+    def line_polygon_intersect(self,line, vertices):
         """
         return True if Line intersect with rect
         """
-        vertices = rect_vertices
         WallP1 = point(line.x1, line.y1)
         WallP2 = point(line.x2, line.y2)
         CarP0, CarP3 = point(vertices[0][0], vertices[0][1]), point(
@@ -31,6 +30,8 @@ class Collosion:
             return True
         return False
 
+    # Resource1 : https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+    # Resource2 : https://bryceboe.com/2006/10/23/line-segment-intersection-algorithm/
 
     def intersect(self,A, B, C, D):
         # Return true if line segments AB and CD intersect
@@ -38,6 +39,10 @@ class Collosion:
 
     def ccw(self,A, B, C):
         return (C.y-A.y) * (B.x-A.x) > (B.y-A.y) * (C.x-A.x)
+    
+
+    # Resource1 : https://gamedev.stackexchange.com/questions/43873/how-does-the-sat-collision-detection-algorithm-work
+    # Resource2 : https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
     
     def two_polygon_intersect(self, VerticesA ,VerticesB):
         """

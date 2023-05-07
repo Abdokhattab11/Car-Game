@@ -8,37 +8,14 @@ class point:
         self.y = y
 
 class Collosion:
-    
-
     def line_polygon_intersect(self,line, vertices):
         """
         return True if Line intersect with rect
         """
-        WallP1 = point(line.x1, line.y1)
-        WallP2 = point(line.x2, line.y2)
-        CarP0, CarP3 = point(vertices[0][0], vertices[0][1]), point(
-            vertices[3][0], vertices[3][1])
-        CarP1, CarP2 = point(vertices[1][0], vertices[1][1]), point(
-            vertices[2][0], vertices[2][1])
-        if self.intersect(WallP1, WallP2, CarP0, CarP3):
-            return True
-        if self.intersect(WallP1, WallP2, CarP1, CarP2):
-            return True
-        if self.intersect(WallP1, WallP2, CarP0, CarP1):
-            return True
-        if self.intersect(WallP1, WallP2, CarP2, CarP3):
+        lstOfVertices = line.get_vertices()
+        if self.two_polygon_intersect(lstOfVertices, vertices):
             return True
         return False
-
-    # Resource1 : https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-    # Resource2 : https://bryceboe.com/2006/10/23/line-segment-intersection-algorithm/
-
-    def intersect(self,A, B, C, D):
-        # Return true if line segments AB and CD intersect
-        return self.ccw(A, C, D) != self.ccw(B, C, D) and self.ccw(A, B, C) != self.ccw(A, B, D)
-
-    def ccw(self,A, B, C):
-        return (C.y-A.y) * (B.x-A.x) > (B.y-A.y) * (C.x-A.x)
     
 
     # Resource1 : https://gamedev.stackexchange.com/questions/43873/how-does-the-sat-collision-detection-algorithm-work

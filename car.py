@@ -56,7 +56,7 @@ class car:
         if self.collosion:
             self.health -= int(10*abs(self.currSpeed)) # Health decrease proportoinal to currSpeed
             sign1 = 1 if self.currSpeed > 0 else -1
-            self.currSpeed = - 0.8*(self.currSpeed) - 0.15*sign1 # collsion in opposite direction
+            self.currSpeed = -(self.currSpeed) - 0.15*sign1 # collsion in opposite direction
             self.speed = 0 # make final speed = 0
             self.collosion = False 
         

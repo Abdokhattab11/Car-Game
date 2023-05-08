@@ -19,10 +19,10 @@ class line:
 class box:
     def __init__(self, left, bottom, right, top,Type = 0):
         # Type = 0 -->> coin , Type = 1 -->> bomb , Type = 2 -->> healthkit
-        self.left = left-10
-        self.bottom = bottom-10
-        self.right = right+10
-        self.top = top+10
+        self.left = left-5
+        self.bottom = bottom-5
+        self.right = right+5
+        self.top = top+5
         self.type = Type
         self.collected = False
 
@@ -33,7 +33,7 @@ class box:
             if self.type == 1:
                 return
             if self.type == 2:
-                return
+                glBindTexture(GL_TEXTURE_2D, HEALTH)
             glBegin(GL_POLYGON)
             glTexCoord(0,0)
             glVertex(self.left, self.bottom, 0)
@@ -70,9 +70,11 @@ maze1 = [line(0, 100, 300, 100), line(
 
 
 bombs1 =[]
-coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,540,70,560),box(50,630,70,650),
-          box(225,440,245,460),box(375,440,395,460),box(750,440,770,460),box(525,40,545,60),box(675,540,695,560),
-          box(1125,140,1145,160),box(1125,440,1145,460),box(850,340,870,360),box(975,640,995,660),box(500,240,520,260)]
+coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,630,70,650),
+          box(225,440,245,460),box(525,40,545,60),box(675,540,695,560)
+          ,box(1125,440,1145,460),box(850,340,870,360),box(500,240,520,260)]
+
+health1 = [box(1125,140,1145,160,2),box(750,440,770,460,2),box(975,640,995,660,2),box(50,540,70,560,2),box(375,440,395,460,2)]
 
 
 def draw_line(line: line):
@@ -89,8 +91,13 @@ def draw_map():
         draw_line(maze1[i])
 
 def draw_coins():
-    glColor3f(1, 1, 0)
+    glColor3f(1, 1, 1)
     for i in coins1:
+        i.draw()
+
+def draw_healthkit():
+    glColor3f(1,1,1)
+    for i in health1:
         i.draw()
 
 def draw_grid():

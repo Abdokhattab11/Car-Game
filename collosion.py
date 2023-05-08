@@ -99,6 +99,16 @@ def test_car_bomb(carModel,bombs):
             return True
     return False
 
+def test_car_health(carModel,health):
+    carVertices = carModel.get_vertices()
+    for i in health:
+        if i.collected:
+            continue
+        healthVertices = i.get_vertices()
+        if col.two_polygon_intersect(carVertices,healthVertices):
+            i.collected = True
+            return True
+    return False
         
 if __name__ == "__main__":
     c = Collosion()

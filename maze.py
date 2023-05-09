@@ -31,7 +31,7 @@ class box:
             if self.type == 0:
                 glBindTexture(GL_TEXTURE_2D, STAR)
             if self.type == 1:
-                return
+                glBindTexture(GL_TEXTURE_2D, BOMB)
             if self.type == 2:
                 glBindTexture(GL_TEXTURE_2D, HEALTH)
             glBegin(GL_POLYGON)
@@ -69,7 +69,7 @@ maze1 = [line(0, 100, 300, 100), line(
     line(0, 700, 0, 0,)]
 
 
-bombs1 =[]
+bombs1 =[box(180,225,210,255,1),box(330,530,360,560,1),box(480,330,510,360,1),box(990,225,1020,255,1),box(1140,530,1170,560,1),box(990,10,1020,40,1)]
 coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,630,70,650),
           box(225,440,245,460),box(525,40,545,60),box(675,540,695,560)
           ,box(1125,440,1145,460),box(850,340,870,360),box(500,240,520,260)]
@@ -98,6 +98,11 @@ def draw_coins():
 def draw_healthkit():
     glColor3f(1,1,1)
     for i in health1:
+        i.draw()
+
+def draw_bombs():
+    glColor3f(1,1,1)
+    for i in bombs1:
         i.draw()
 
 def draw_grid():

@@ -17,6 +17,7 @@ CREDIT_RED = 9
 CREDIT_YELLOW = 10
 BACK_YELLOW = 11
 BACK_RED = 12
+BOMB = 13
 
 def load_texture():
     glEnable(GL_TEXTURE_2D)
@@ -36,6 +37,7 @@ def load_texture():
     images.append(pygame.image.load("texture/credits_yellow.png"))
     images.append(pygame.image.load("texture/back_yellow.png"))
     images.append(pygame.image.load("texture/back_red.png"))
+    images.append(pygame.image.load("texture/bomb.png"))
     textures = [pygame.image.tostring(img,"RGBA", 1) for img in images]
 
     glGenTextures(len(images), texture_names)

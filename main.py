@@ -37,7 +37,9 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/car_break.wav"),
         pygame.mixer.Sound("Sound/song.wav"),
         pygame.mixer.Sound("Sound/lobby_music.wav"),
-        pygame.mixer.Sound("Sound/mouse_point.wav")]
+        pygame.mixer.Sound("Sound/mouse_point.wav"),
+        pygame.mixer.Sound("Sound/bomb.wav"),
+        ]
 sounds[10].set_volume(0.5)
 
 def init_proj():
@@ -84,7 +86,7 @@ def display():
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
-        
+        glClearColor(0.2,0.2,0.2,0)
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
             sounds[0].set_volume(0.2)
@@ -92,8 +94,9 @@ def display():
             sounds[5].stop()
             sounds[6].stop()
         if test_car_bomb(carModel, bombs1):
+            sounds[11].set_volume(0.5)
+            sounds[11].play(0)
             carModel.health -= 50
-            carModel.sound("Sound/bomb.wav",1,0)
         if test_car_coin(carModel, coins1):
             carModel.coins += 1
             sounds[1].play(0)
@@ -101,12 +104,13 @@ def display():
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
             sounds[2].set_volume(0.2)
             sounds[2].play(0)
-        if carModel.health < 0:
-            os._exit(0)
+        #if carModel.health < 0:
+        #    os._exit(0)
 
         draw_map()
         draw_coins()
         draw_healthkit()
+        draw_bombs()
         
         glPushMatrix()
         glTranslate(-20,5,0)

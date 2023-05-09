@@ -104,17 +104,7 @@ class car:
 
     def load_texture(self):
         return
-
-    def sound(self,file_path,v=1.00,num=0):
         
-        
-        sound = pygame.mixer.Sound(file_path)
-        sound.set_volume(v)
-        sound.play(num)
-    
-        return sound
-        
-
     def get_vertices(self):
         # return type is a list
         # Step 1: Calculate the center of the car

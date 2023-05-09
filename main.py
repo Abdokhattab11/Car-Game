@@ -84,10 +84,10 @@ def display():
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
-
+        
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
-            sounds[0].set_volume(0.5)
+            sounds[0].set_volume(0.2)
             sounds[0].play(0)
             sounds[5].stop()
             sounds[6].stop()
@@ -164,7 +164,7 @@ def keyboard(key, x, y):
             sounds[5].play(-1)
             Go_Drive_Flag = True
     if key == b"s":
-        carModel.speed = -1.5
+        carModel.speed = -0.8
         carModel.dir = -1
         if Go_Back_Flag==False and start_game == 1:
             sounds[6].set_volume(0.5)
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     glutInit()
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT)
     glutInitWindowPosition(50, 50)
-    glutCreateWindow(b"Need For Speed")
+    glutCreateWindow(b"Maze Adventure")
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA|GLUT_DEPTH)
     glutDisplayFunc(display)
     glutTimerFunc(PERIOD, Timer, 1)

@@ -225,6 +225,10 @@ def mousePass(x,y):
         if On_button == False:
             sounds[10].play(0)
             On_button = True
+    elif credits_sc == 1 and x >= 260 and x <= 460 and y >= 600 and y <= 680:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
     else:
         On_button = False
 

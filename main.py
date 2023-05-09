@@ -16,11 +16,12 @@ WINDOW_HEIGHT = 700
 PERIOD = 10
 mouse_x, mouse_y = 0, 0
 start_game = 0
+credits_sc = 0
 
 carModel = car()
 
 def init_proj():
-    glClearColor(0.2, 0.2, 0.2, 0)
+    glClearColor(0, 0, 0, 0)
     glMatrixMode(GL_PROJECTION)
     glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
     glMatrixMode(GL_MODELVIEW)
@@ -33,21 +34,34 @@ def init_proj():
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    if start_game == 0:
-        #glClearColor(0, 0, 0, 0)
+    if credits_sc == 1:
+        # BACk Button
+        if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
+            draw_texture(260,20,460,100,BACK_RED)
+        else:
+            draw_texture(260,20,460,100,BACK_YELLOW)
+        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,CREDIT_SCREEN)
+    elif start_game == 0:
         glLoadIdentity()
+        # ON START Button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 280 and mouse_y <= 360:
             draw_texture(280,340,520,420,START_RED)
         else:
             draw_texture(280,340,520,420,START_YELLOW)
+        # On CREDITS button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 380 and mouse_y <= 460:
-            draw_texture(280,240,520,320,EXIT_RED)
+            draw_texture(280,240,520,320,CREDIT_RED)
         else:
-            draw_texture(280,240,520,320,EXIT_YELLOW)
+            draw_texture(280,240,520,320,CREDIT_YELLOW)
+
+        # On RED button
+        if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 480 and mouse_y <= 560:
+            draw_texture(280,140,520,220,EXIT_RED)
+        else:
+            draw_texture(280,140,520,220,EXIT_YELLOW)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
-        #glClearColor(0.2, 0.2, 0.2, 0)
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
         if test_car_bomb(carModel, bombs1):
@@ -56,8 +70,8 @@ def display():
             carModel.coins += 1
         if test_car_health(carModel,health1):
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
-        #if carModel.health < 0:
-        #    os._exit(0)
+        if carModel.health < 0:
+            os._exit(0)
 
         draw_map()
         draw_coins()
@@ -138,14 +152,18 @@ def mousePass(x,y):
     global mouse_x,mouse_y
     mouse_x = x
     mouse_y = y
-    print(x,y)
 
 def mouse(state,key,x,y):
-    global start_game
+    global start_game, credits_sc
     if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0:
         start_game = 1
-    if x >= 280 and x <= 520 and y >= 380 and y <= 460 and key == GLUT_LEFT_BUTTON  and start_game == 0:
-        os._exit(0)
+    if x >= 280 and x <= 520 and y >= 380 and y <= 460 and key == GLUT_LEFT_BUTTON  and start_game == 0 and credits_sc == 0:
+        credits_sc = 1
+    if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 580 and mouse_y <= 560 and start_game == 0:
+        os._exit(0) 
+    if x >= 260 and x <= 460 and y >= 600 and y <= 680 and key ==GLUT_LEFT_BUTTON and credits_sc == 1:
+        credits_sc = 0
+
 
 
 

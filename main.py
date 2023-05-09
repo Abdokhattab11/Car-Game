@@ -18,6 +18,7 @@ First_Start_Flag = True
 Go_Drive_Flag=False
 Go_Back_Flag=False
 Break_Flag =False
+On_button = False
 mouse_x, mouse_y = 0, 0
 start_game = 0
 credits_sc = 0
@@ -34,9 +35,10 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/go_driving.wav"),
         pygame.mixer.Sound("Sound/car_reverse.wav"),
         pygame.mixer.Sound("Sound/car_break.wav"),
-        pygame.mixer.Sound("Sound/song.wav")]
-
-sounds[4].play(0)
+        pygame.mixer.Sound("Sound/song.wav"),
+        pygame.mixer.Sound("Sound/lobby_music.wav"),
+        pygame.mixer.Sound("Sound/mouse_point.wav")]
+sounds[10].set_volume(0.5)
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -74,7 +76,7 @@ def display():
         else:
             draw_texture(280,240,520,320,CREDIT_YELLOW)
 
-        # On RED button
+        # On EXIT button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 480 and mouse_y <= 560:
             draw_texture(280,140,520,220,EXIT_RED)
         else:
@@ -82,6 +84,7 @@ def display():
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
+
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
             sounds[0].set_volume(0.5)
@@ -96,7 +99,7 @@ def display():
             sounds[1].play(0)
         if test_car_health(carModel,health1):
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
-            sounds[2].set_volume(0.5)
+            sounds[2].set_volume(0.2)
             sounds[2].play(0)
         if carModel.health < 0:
             os._exit(0)
@@ -156,14 +159,14 @@ def keyboard(key, x, y):
     if key == b"w":
         carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
         carModel.dir = 1
-        if Go_Drive_Flag == False:
-            sounds[5].set_volume(0.2)
+        if Go_Drive_Flag == False and start_game == 1:
+            sounds[5].set_volume(0.1)
             sounds[5].play(-1)
             Go_Drive_Flag = True
     if key == b"s":
         carModel.speed = -1.5
         carModel.dir = -1
-        if Go_Back_Flag==False:
+        if Go_Back_Flag==False and start_game == 1:
             sounds[6].set_volume(0.5)
             sounds[6].play(-1)
             Go_Back_Flag=True
@@ -172,7 +175,7 @@ def keyboard(key, x, y):
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
-        if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False:
+        if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False and start_game == 1:
             sounds[7].play(0)
             Break_Flag==True
         carModel.currSpeed = 0
@@ -180,9 +183,10 @@ def keyboard(key, x, y):
         sounds[6].stop()
         sounds[5].stop()
         
-    if key == b"e":
+    if key == b"e" and start_game == 1:
+        sounds[3].set_volume(0.2)
         sounds[3].play(0)
-    if key ==b'p':
+    if key ==b'p'and start_game == 1:
         sounds[8].play(0)
     
 
@@ -204,17 +208,37 @@ def keyboardup(key, x, y):
         sounds[8].stop()
 
 def mousePass(x,y):
-    global mouse_x,mouse_y
+    global mouse_x,mouse_y, On_button
     mouse_x = x
     mouse_y = y
+    # Start
+    
+    if start_game == 0 and credits_sc == 0 and x >= 280 and x <= 520 and y >= 280 and y <= 360:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
+    elif start_game == 0 and credits_sc == 0 and x >= 280 and x <= 520 and y >= 380 and y <= 460 and start_game == 0:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
+    elif start_game == 0 and credits_sc == 0 and x >= 280 and x <= 520 and y >= 480 and y <= 560 and start_game == 0:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
+    else:
+        On_button = False
+
 
 def mouse(state,key,x,y):
     global start_game, credits_sc
     if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0:
         start_game = 1
+        sounds[9].stop()
+        sounds[4].set_volume(0.2)
+        sounds[4].play(0)
     if x >= 280 and x <= 520 and y >= 380 and y <= 460 and key == GLUT_LEFT_BUTTON  and start_game == 0 and credits_sc == 0:
         credits_sc = 1
-    if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 580 and mouse_y <= 560 and start_game == 0:
+    if x >= 280 and x <= 520 and y >= 480 and y <= 560 and  key == GLUT_LEFT_BUTTON and start_game == 0:
         os._exit(0) 
     if x >= 260 and x <= 460 and y >= 600 and y <= 680 and key ==GLUT_LEFT_BUTTON and credits_sc == 1:
         credits_sc = 0
@@ -223,6 +247,8 @@ def mouse(state,key,x,y):
 
 
 if __name__ == "__main__":
+    sounds[9].set_volume(0.1)
+    sounds[9].play(-1)
     glutInit()
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT)
     glutInitWindowPosition(50, 50)

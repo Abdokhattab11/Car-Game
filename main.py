@@ -14,8 +14,23 @@ from texture import *
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
 PERIOD = 10
-
+First_Start_Flag = True
+Go_Drive_Flag=False
+Go_Back_Flag=False
+Wait_Flag=False
 carModel = car()
+
+
+pygame.init()
+sounds=[pygame.mixer.Sound("Sound/crash.wav"),
+        pygame.mixer.Sound("Sound/coin.wav"),
+        pygame.mixer.Sound("Sound/revive.wav"),
+        pygame.mixer.Sound("Sound/car_horn.wav"),
+        pygame.mixer.Sound("Sound/starting_game.wav"),
+        pygame.mixer.Sound("Sound/go_driving.wav"),
+        pygame.mixer.Sound("Sound/car_reverse.wav"),
+        pygame.mixer.Sound("Sound/crash.wav")]
+
 
 def init_proj():
     glClearColor(0.2, 0.2, 0.2, 0)
@@ -30,15 +45,28 @@ def init_proj():
 
 
 def display():
+    global First_Start_Flag
+    Wait_Flag=True
+    
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     if test_car_walls(carModel, maze1):
         carModel.collosion = True
+        sounds[0].set_volume(0.5)
+        sounds[0].play(0)
+        sounds[5].stop()
+        sounds[6].stop()
     if test_car_bomb(carModel, bombs1):
         carModel.health = 0
+        carModel.sound("Sound/bomb.wav",1,0)
     if test_car_coin(carModel, coins1):
         carModel.coins += 1
+        sounds[1].play(0)
+        
     if test_car_health(carModel,health1):
         carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
+        sounds[2].set_volume(0.5)
+        sounds[2].play(0)
     #if carModel.health < 0:
     #    os._exit(0)
 
@@ -60,6 +88,12 @@ def display():
     carModel.animation()
     carModel.draw()
     glPopMatrix()
+    
+    if First_Start_Flag is True:
+        sounds[4].play(0)
+        First_Start_Flag = False
+    
+        
     glutSwapBuffers()
 
 
@@ -79,13 +113,21 @@ def print_text(s, x, y):
 
 
 def keyboard(key, x, y):
-    global carModel
+    global carModel,Go_Drive_Flag,Go_Back_Flag
     if key == b"w":
         carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
         carModel.dir = 1
+        if Go_Drive_Flag == False:
+            sounds[5].set_volume(0.2)
+            sounds[5].play(-1)
+            Go_Drive_Flag = True
     if key == b"s":
         carModel.speed = -1.5
         carModel.dir = -1
+        if Go_Back_Flag==False:
+            sounds[6].set_volume(0.5)
+            sounds[6].play(-1)
+            Go_Back_Flag=True
     if key == b"d":
         carModel.rot = -1.5  # to make it smooths
     if key == b"a":
@@ -93,13 +135,19 @@ def keyboard(key, x, y):
     if key == b" ":
         carModel.currSpeed = 0
         carModel.speed = 0
+    if key == b"e":
+        sounds[3].play(0)
 
 
 def keyboardup(key, x, y):
-    global carModel
+    global carModel,Go_Drive_Flag,Go_Back_Flag
     if key == b"w" or key == b"s":
         carModel.speed = 0
         carModel.dir = 0
+        Go_Drive_Flag=False
+        Go_Back_Flag=False
+        sounds[5].stop()
+        sounds[6].stop()
     if key == b"d" or key == b"a":
         carModel.rot = 0
 

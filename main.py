@@ -17,7 +17,6 @@ PERIOD = 10
 First_Start_Flag = True
 Go_Drive_Flag=False
 Go_Back_Flag=False
-Wait_Flag=False
 Break_Flag =False
 carModel = car()
 
@@ -33,6 +32,7 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/car_break.wav"),
         pygame.mixer.Sound("Sound/song.wav")]
 
+sounds[4].play(0)
 
 def init_proj():
     glClearColor(0.2, 0.2, 0.2, 0)
@@ -47,8 +47,6 @@ def init_proj():
 
 
 def display():
-    global First_Start_Flag
-    Wait_Flag=True
     
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -91,11 +89,7 @@ def display():
     carModel.draw()
     glPopMatrix()
     
-    if First_Start_Flag is True:
-        sounds[4].play(0)
-        First_Start_Flag = False
-    
-        
+  
     glutSwapBuffers()
 
 

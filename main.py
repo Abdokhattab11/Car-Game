@@ -18,6 +18,7 @@ First_Start_Flag = True
 Go_Drive_Flag=False
 Go_Back_Flag=False
 Wait_Flag=False
+Break_Flag =False
 carModel = car()
 
 
@@ -29,7 +30,8 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/starting_game.wav"),
         pygame.mixer.Sound("Sound/go_driving.wav"),
         pygame.mixer.Sound("Sound/car_reverse.wav"),
-        pygame.mixer.Sound("Sound/crash.wav")]
+        pygame.mixer.Sound("Sound/car_break.wav"),
+        pygame.mixer.Sound("Sound/song.wav")]
 
 
 def init_proj():
@@ -113,7 +115,7 @@ def print_text(s, x, y):
 
 
 def keyboard(key, x, y):
-    global carModel,Go_Drive_Flag,Go_Back_Flag
+    global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag
     if key == b"w":
         carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
         carModel.dir = 1
@@ -133,14 +135,23 @@ def keyboard(key, x, y):
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
+        if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False:
+            sounds[7].play(0)
+            Break_Flag==True
         carModel.currSpeed = 0
         carModel.speed = 0
+        sounds[6].stop()
+        sounds[5].stop()
+        
     if key == b"e":
         sounds[3].play(0)
+    if key ==b'p':
+        sounds[8].play(0)
+    
 
 
 def keyboardup(key, x, y):
-    global carModel,Go_Drive_Flag,Go_Back_Flag
+    global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag
     if key == b"w" or key == b"s":
         carModel.speed = 0
         carModel.dir = 0
@@ -150,6 +161,10 @@ def keyboardup(key, x, y):
         sounds[6].stop()
     if key == b"d" or key == b"a":
         carModel.rot = 0
+    if key == b" ":
+        Break_Flag=False
+    if key ==b'o':
+        sounds[8].stop()
 
 
 if __name__ == "__main__":

@@ -37,8 +37,11 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/car_break.wav"),
         pygame.mixer.Sound("Sound/song.wav"),
         pygame.mixer.Sound("Sound/lobby_music.wav"),
-        pygame.mixer.Sound("Sound/mouse_point.wav")]
+        pygame.mixer.Sound("Sound/mouse_point.wav"),
+        pygame.mixer.Sound("Sound/car_reverse1.wav")
+        ]
 sounds[10].set_volume(0.5)
+sounds[11].set_volume(0.1)
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -87,7 +90,7 @@ def display():
 
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
-            sounds[0].set_volume(0.5)
+            sounds[0].set_volume(0.2)
             sounds[0].play(0)
             sounds[5].stop()
             sounds[6].stop()
@@ -169,6 +172,7 @@ def keyboard(key, x, y):
         if Go_Back_Flag==False and start_game == 1:
             sounds[6].set_volume(0.5)
             sounds[6].play(-1)
+            sounds[11].play(-1)
             Go_Back_Flag=True
     if key == b"d":
         carModel.rot = -1.5  # to make it smooths
@@ -200,6 +204,7 @@ def keyboardup(key, x, y):
         Go_Back_Flag=False
         sounds[5].stop()
         sounds[6].stop()
+        sounds[11].stop()
     if key == b"d" or key == b"a":
         carModel.rot = 0
     if key == b" ":

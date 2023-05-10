@@ -19,6 +19,7 @@ Go_Drive_Flag=False
 Go_Back_Flag=False
 Break_Flag =False
 On_button = False
+Song_Flag=False
 mouse_x, mouse_y = 0, 0
 start_game = 0
 credits_sc = 0
@@ -41,6 +42,7 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/car_reverse1.wav"),
         pygame.mixer.Sound("Sound/bomb.wav")
         ]
+sounds[8].set_volume(0.3)
 sounds[10].set_volume(0.5)
 sounds[11].set_volume(0.08)
 
@@ -161,7 +163,7 @@ def print_text(s, x, y):
 
 
 def keyboard(key, x, y):
-    global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag
+    global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag,Song_Flag
     if key == b"w":
         carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
         carModel.dir = 1
@@ -194,7 +196,12 @@ def keyboard(key, x, y):
         sounds[3].set_volume(0.2)
         sounds[3].play(0)
     if key ==b'p'and start_game == 1:
-        sounds[8].play(0)
+        if Song_Flag:
+            sounds[8].stop()
+            Song_Flag=False
+        else:
+            Song_Flag=True
+            sounds[8].play(0)
     
 
 
@@ -212,8 +219,6 @@ def keyboardup(key, x, y):
         carModel.rot = 0
     if key == b" ":
         Break_Flag=False
-    if key ==b'o':
-        sounds[8].stop()
 
 def mousePass(x,y):
     global mouse_x,mouse_y, On_button

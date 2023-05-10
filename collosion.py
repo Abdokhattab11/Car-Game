@@ -94,8 +94,11 @@ def test_car_coin(carModel, coins):
 def test_car_bomb(carModel,bombs):
     carVertices = carModel.get_vertices()
     for i in bombs:
+        if i.collected == True:
+            continue
         bombVertices = i.get_vertices()
         if col.two_polygon_intersect(carVertices,bombVertices) == True:
+            i.collected = True
             return True
     return False
 

@@ -38,14 +38,11 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/song.wav"),
         pygame.mixer.Sound("Sound/lobby_music.wav"),
         pygame.mixer.Sound("Sound/mouse_point.wav"),
-<<<<<<< HEAD
-        pygame.mixer.Sound("Sound/car_reverse1.wav")
-=======
-        pygame.mixer.Sound("Sound/bomb.wav"),
->>>>>>> b7b4faadb2218f3e83dfb2effee5f1015f33276c
+        pygame.mixer.Sound("Sound/car_reverse1.wav"),
+        pygame.mixer.Sound("Sound/bomb.wav")
         ]
 sounds[10].set_volume(0.5)
-sounds[11].set_volume(0.1)
+sounds[11].set_volume(0.08)
 
 def init_proj():
     glClearColor(0, 0, 0, 0)
@@ -99,8 +96,8 @@ def display():
             sounds[5].stop()
             sounds[6].stop()
         if test_car_bomb(carModel, bombs1):
-            sounds[11].set_volume(0.5)
-            sounds[11].play(0)
+            sounds[12].set_volume(0.5)
+            sounds[12].play(0)
             carModel.health -= 50
         if test_car_coin(carModel, coins1):
             carModel.coins += 1

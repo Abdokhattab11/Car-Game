@@ -90,6 +90,12 @@ def display():
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        cen = carModel.center()
+        glOrtho(cen[0] - 300, cen[0] + 300, cen[1] - 175, cen[1] + 175, -1, 1)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
         glClearColor(0.2,0.2,0.2,0)
         if test_car_walls(carModel, maze1):
             carModel.collosion = True

@@ -21,7 +21,7 @@ Break_Flag =False
 On_button = False
 Song_Flag=False
 mouse_x, mouse_y = 0, 0
-start_game = 2
+start_game = 0
 credits_sc = 0
 
 carModel = car()

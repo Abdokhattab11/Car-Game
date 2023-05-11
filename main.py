@@ -21,7 +21,7 @@ Break_Flag =False
 On_button = False
 Song_Flag=False
 mouse_x, mouse_y = 0, 0
-start_game = 0
+start_game = 2
 credits_sc = 0
 
 carModel = car()
@@ -59,8 +59,6 @@ def init_proj():
 
 
 def display():
-    
-    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     if credits_sc == 1:
         # BACk Button
@@ -117,20 +115,20 @@ def display():
         #if carModel.health < 0:
         #    os._exit(0)
 
+        glPushMatrix()
+        glTranslate(-230,165,0)
+        draw_health(carModel.health, cen)
+        glPopMatrix()
+
+        glPushMatrix()
+        s = "coins : " + str(carModel.coins)
+        print_text(s,cen[0]-285,cen[1] + 140)
+        glPopMatrix()
+
         draw_map()
         draw_coins()
         draw_healthkit()
         draw_bombs()
-        
-        glPushMatrix()
-        glTranslate(-20,5,0)
-        draw_health(carModel.health)
-        glPopMatrix()
-
-        glPushMatrix()
-        s = "Coins : " + str(carModel.coins)
-        print_text(s,20,WINDOW_HEIGHT - 40)
-        glPopMatrix()
 
         glPushMatrix()
         carModel.animation()
@@ -162,7 +160,7 @@ def print_text(s, x, y):
     glLineWidth(2)
     glColor3f(1, 1, 0)
     glTranslate(x, y, 0)
-    glScale(0.1, 0.1, 1)
+    glScale(0.08, 0.08, 1)
     s = s.encode()
     for char in s:
         glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, char)

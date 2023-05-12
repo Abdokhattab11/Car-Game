@@ -29,7 +29,7 @@ carModel = car()
 
 
 pygame.init()
-sounds=[pygame.mixer.Sound("Sound/crash.wav"),
+sounds=[pygame.mixer.Sound("Sound/crash.wav"), 
         pygame.mixer.Sound("Sound/coin.wav"),
         pygame.mixer.Sound("Sound/revive.wav"),
         pygame.mixer.Sound("Sound/car_horn.wav"),
@@ -41,7 +41,8 @@ sounds=[pygame.mixer.Sound("Sound/crash.wav"),
         pygame.mixer.Sound("Sound/lobby_music.wav"),
         pygame.mixer.Sound("Sound/mouse_point.wav"),
         pygame.mixer.Sound("Sound/car_reverse1.wav"),
-        pygame.mixer.Sound("Sound/bomb.wav")
+        pygame.mixer.Sound("Sound/bomb.wav"),
+        pygame.mixer.Sound("Sound/bravo.wav")
         ]
 sounds[8].set_volume(0.3)
 sounds[10].set_volume(0.5)
@@ -118,6 +119,8 @@ def display():
             sounds[2].set_volume(0.2)
             sounds[2].play(0)
         if test_car_finish(carModel,finish):
+            sounds[13].set_volume(0.5)
+            sounds[13].play(0)
             you_win = 1
             start_game = 4
         glPushMatrix()

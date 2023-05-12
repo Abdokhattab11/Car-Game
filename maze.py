@@ -14,8 +14,8 @@ class line:
         self.vertical = (x1 == x2)
     def get_vertices(self):
         return [[self.x1,self.y1],[self.x2,self.y2]]
-    def draw_line(self,r=1,g=0,b=0):
-        glColor3f(r, g, b)
+    def draw_line(self):
+        glColor3f(1, 0, 0)
         glLineWidth(4)
         glBegin(GL_LINES)
         glVertex(self.x1, self.y1, 0)
@@ -84,8 +84,15 @@ coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,630,
 health1 = [box(1125,140,1145,160,2),box(750,440,770,460,2),box(975,640,995,660,2),box(50,540,70,560,2),box(375,440,395,460,2)]
 
 
+def reset(lst_of_box : box):
+    for i in lst_of_box:
+        if i.collected:
+            i.collected = False
 
-
+def reset_maze():
+    reset(bombs1)
+    reset(coins1)
+    reset(health1)
 
 def draw_map():
     for i in range(len(maze1)):

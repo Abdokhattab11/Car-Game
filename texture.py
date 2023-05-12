@@ -3,7 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-texture_names = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+texture_names = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 STAR = 0
 CAR = 1
 HEALTH = 2
@@ -18,6 +18,11 @@ CREDIT_YELLOW = 10
 BACK_YELLOW = 11
 BACK_RED = 12
 BOMB = 13
+PLAY_AGAIN = 14
+TRY_AGAIN_YEL = 15
+TRY_AGAIN_RED = 16
+EXIT2_YEL = 17
+EXIT2_RED = 18
 
 def load_texture():
     glEnable(GL_TEXTURE_2D)
@@ -38,6 +43,11 @@ def load_texture():
     images.append(pygame.image.load("texture/back_yellow.png"))
     images.append(pygame.image.load("texture/back_red.png"))
     images.append(pygame.image.load("texture/bomb.png"))
+    images.append(pygame.image.load("texture/game_over.png"))
+    images.append(pygame.image.load("texture/try_again_yellow.png"))
+    images.append(pygame.image.load("texture/try_again_red.png"))
+    images.append(pygame.image.load("texture/exit2_yellow.png"))
+    images.append(pygame.image.load("texture/exit2_red.png"))
     textures = [pygame.image.tostring(img,"RGBA", 1) for img in images]
 
     glGenTextures(len(images), texture_names)

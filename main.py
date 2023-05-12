@@ -22,6 +22,7 @@ On_button = False
 Song_Flag=False
 mouse_x, mouse_y = 0, 0
 start_game = 0
+game_over = 0
 credits_sc = 0
 
 carModel = car()
@@ -60,6 +61,10 @@ def init_proj():
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    global start_game, game_over
+    if carModel.health <= 0:
+        start_game = 2 
+        game_over = 1
     if credits_sc == 1:
         # BACk Button
         if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
@@ -112,9 +117,6 @@ def display():
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
             sounds[2].set_volume(0.2)
             sounds[2].play(0)
-        #if carModel.health < 0:
-        #    os._exit(0)
-
         glPushMatrix()
         glTranslate(-230,165,0)
         draw_health(carModel.health, cen)
@@ -134,6 +136,21 @@ def display():
         carModel.animation()
         carModel.draw()
         glPopMatrix()
+    elif game_over == 1:
+        glClearColor(0,0,0,0)
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
+        glMatrixMode(GL_MODELVIEW)
+        if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-250 and mouse_y <= 700-150:
+            draw_texture(480,150,720,250,TRY_AGAIN_RED)
+        else:
+            draw_texture(480,150,720,250,TRY_AGAIN_YEL)
+        if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-130 and mouse_y <= 700-30:
+            draw_texture(480,30,720,130,EXIT2_RED)
+        else:
+            draw_texture(480,30,720,130,EXIT2_YEL)
+        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,PLAY_AGAIN)
     glutSwapBuffers()
 
 def draw_texture(left,bottom, right,top,tex_iden):
@@ -246,12 +263,20 @@ def mousePass(x,y):
         if On_button == False:
             sounds[10].play(0)
             On_button = True
+    elif game_over == 1 and x >= 480 and x <= 720 and y >= 700-250 and y <= 700-150:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
+    elif game_over == 1 and x >= 480 and x <= 720 and y >= 700-130 and y <= 700-30:
+        if On_button == False:
+            sounds[10].play(0)
+            On_button = True
     else:
         On_button = False
 
 
 def mouse(state,key,x,y):
-    global start_game, credits_sc
+    global start_game, credits_sc, carModel,game_over
     if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0:
         start_game = 1
         sounds[9].stop()
@@ -263,6 +288,18 @@ def mouse(state,key,x,y):
         os._exit(0) 
     if x >= 260 and x <= 460 and y >= 600 and y <= 680 and key ==GLUT_LEFT_BUTTON and credits_sc == 1:
         credits_sc = 0
+    # try Again
+    if game_over == 1 and x >= 480 and x <= 720 and y >= 700-250 and y <= 700-150 and key ==GLUT_LEFT_BUTTON:
+        carModel = car() # Make a new car or reset all param , we choose to create a new car
+        # we need to reset all item's in maze
+        reset_maze()
+        start_game = 1
+        game_over = 0
+    # exit 
+    if game_over == 1 and x >= 480 and x <= 720 and y >= 700-130 and y <= 700-30 and key ==GLUT_LEFT_BUTTON:
+        os._exit(0)
+        
+
 
 
 

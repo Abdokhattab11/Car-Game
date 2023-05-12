@@ -77,7 +77,6 @@ def test_car_walls(carModel, walls):
     vertices = carModel.get_vertices()
     for i in walls:
         if col.line_polygon_intersect(i,vertices):
-            i.draw_line(0,1,0)
             return True
     return False
 

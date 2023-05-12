@@ -112,7 +112,15 @@ def test_car_health(carModel,health):
             i.collected = True
             return True
     return False
-        
+
+def test_car_finish(carModel,finsh):
+    carVertices = carModel.get_vertices()
+    for i in finsh:
+        healthVertices = i.get_vertices()
+        if col.two_polygon_intersect(carVertices,healthVertices):
+            return True
+    return False
+
 if __name__ == "__main__":
     c = Collosion()
     if c.two_polygon_intersect([[0,0],[10,0],[10,10],[0,10]], [[20,0],[30,0],[30,10],[20,10]]) == False:

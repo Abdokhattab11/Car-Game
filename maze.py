@@ -41,6 +41,8 @@ class box:
                 glBindTexture(GL_TEXTURE_2D, BOMB)
             if self.type == 2:
                 glBindTexture(GL_TEXTURE_2D, HEALTH)
+            if self.type == 3:
+                glBindTexture(GL_TEXTURE_2D, FINISH_LINE)
             glBegin(GL_POLYGON)
             glTexCoord(0,0)
             glVertex(self.left, self.bottom, 0)
@@ -78,11 +80,11 @@ maze1 = [line(0, 100, 300, 100), line(
 
 bombs1 =[box(180,225,210,255,1),box(330,530,360,560,1),box(480,330,510,360,1),box(990,225,1020,255,1),box(1140,530,1170,560,1),box(990,10,1020,40,1)]
 coins1 = [box(400,40,420,60),box(850,140,870,160),box(50,140,70,160),box(50,630,70,650),
-          box(225,440,245,460),box(525,40,545,60),box(675,540,695,560)
+          box(225,440,245,460),box(525,40,545,60)
           ,box(1125,440,1145,460),box(850,340,870,360),box(500,240,520,260)]
 
 health1 = [box(1125,140,1145,160,2),box(750,440,770,460,2),box(975,640,995,660,2),box(50,540,70,560,2),box(375,440,395,460,2)]
-
+finish = [box(730,507-0.5,750,593+0.5,3)]
 
 def reset(lst_of_box : box):
     for i in lst_of_box:
@@ -112,6 +114,12 @@ def draw_bombs():
     glColor3f(1,1,1)
     for i in bombs1:
         i.draw()
+
+def draw_finish():
+    glColor3f(1,1,1)
+    for i in finish:
+        i.draw()
+
 
 def draw_grid():
     glLineWidth(1)

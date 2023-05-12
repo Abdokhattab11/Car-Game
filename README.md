@@ -1,5 +1,13 @@
-# Car-Game <img src="https://media4.giphy.com/media/SvLJ0RFuwQIpnCuBL2/giphy.gif?cid=6c09b9522qmhxsj62ecs5suwzpvk88jr8gq35o7doxzknkcr&ep=v1_stickers_related&rid=giphy.gif&ct=s" width = "90px" height = "100px"/>
-2D car game    
+<div align="center"> <img src="https://media4.giphy.com/media/SvLJ0RFuwQIpnCuBL2/giphy.gif?cid=6c09b9522qmhxsj62ecs5suwzpvk88jr8gq35o7doxzknkcr&ep=v1_stickers_related&rid=giphy.gif&ct=s" width = "150px" height = "150px"/>
+ </div>
+ 
+<div align="center">
+ 
+# Car-Game
+ 
+ </div>
+ 
+2D car game. The story of the game is to free the car from maze with specific number of coins without losing your health be careful from bombs 💣.    The Game made from scratch by OpenGL (python). we used pygame only in game sounds.
 
  <div align="center"> <img   src="https://github.com/youssefelfeky1/youssefelfeky1/assets/124710627/1f0dd804-c58d-495e-8d25-e227abfe9c89"  width ="700px" height ="525px" /> </div>
  
@@ -17,4 +25,5 @@ E --> Car Horn 🎺
 
 P --> Music🎵
 
-SPACE --> brake 🛑
+SPACE --> Brake 🛑
+

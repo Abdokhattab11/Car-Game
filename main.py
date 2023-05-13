@@ -144,6 +144,7 @@ def display():
         carModel.draw()
         glPopMatrix()
     elif game_over == 1:
+        sounds[8].stop()
         glClearColor(0,0,0,0)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -159,6 +160,7 @@ def display():
             draw_texture(480,30,720,130,EXIT2_YEL)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,PLAY_AGAIN)
     elif you_win == 1:
+        sounds[8].stop()
         glClearColor(0,0,0,0)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -226,6 +228,8 @@ def keyboard(key, x, y):
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
+        sounds[11].stop()
+        sounds[6].stop()
         if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False and start_game == 1:
             sounds[7].play(0)
             Break_Flag==True

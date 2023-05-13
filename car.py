@@ -31,6 +31,9 @@ class car:
         self.collosion = False
 
     def draw(self):
+        '''
+        Draw Car Modul with texture
+        '''
         glBindTexture(GL_TEXTURE_2D,CAR)
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)

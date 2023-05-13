@@ -8,7 +8,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from maze import *
 from car import *
-from collosion import *
+from collision import *
 from Healthbar import *
 from texture import *
 WINDOW_WIDTH = 1200

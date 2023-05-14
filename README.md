@@ -12,20 +12,20 @@
  </div>
  
 
- ## Game Story
+ ## 📌 Game Story
  
 2D car game. The story of the game is to free the car from maze with specific number of coins without losing your health be careful from bombs 💣.    The Game made from scratch by OpenGL (python). we used pygame only in game sounds.
 
  <div align="center"> <img   src="https://github.com/youssefelfeky1/youssefelfeky1/assets/124710627/1f0dd804-c58d-495e-8d25-e227abfe9c89"  width ="700px" height ="525px" /> </div>
  
-## Python libraries
+## 🚨 Python libraries
 1) OpenGL
 2) Pygame
 3) Math
 
  
  
-## Game controls
+## 🎮 Game controls
 
 W --> Go Forward ⬆️ 
 
@@ -52,3 +52,16 @@ SPACE --> Brake 🛑
 <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/68235945-d0fd-4685-a540-cd18fb6bd8d6" width = "400" height="300" />
 <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/82b99383-1dae-46d6-a48d-8a2f488090d7" width = "400" height="300" />
 
+## 🫂 Contributers:
+
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()

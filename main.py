@@ -167,21 +167,21 @@ def display():
         if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-130 and mouse_y <= 700-30:
             draw_texture(480,30,720,130,EXIT2_RED)
         else:
-            draw_texture(480,30,720,130,EXIT2_YEL)
-        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,PLAY_AGAIN)
+            draw_texture(480, 30, 720, 130, EXIT2_YEL)
+        draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, PLAY_AGAIN)
     # if you win , then load you win screen
     elif you_win == 1:
         sounds[8].stop()
-        glClearColor(0,0,0,0)
+        glClearColor(0, 0, 0, 0)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-130 and mouse_y <= 700-30:
-            draw_texture(480,30,720,130,HOME_RED)
+            draw_texture(480, 30, 720, 130, HOME_RED)
         else:
-            draw_texture(480,30,720,130,HOME_YEL)
+            draw_texture(480, 30, 720, 130, HOME_YEL)
         draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, YOU_WIN)
 
     glutSwapBuffers()

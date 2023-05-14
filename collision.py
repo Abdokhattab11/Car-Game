@@ -75,7 +75,7 @@ class Collosion:
         dx = p2[0] - p1[0]
         dy = p2[1] - p1[1]
         magnitude = sqrt(dx**2 + dy**2)
-        if magnitude != 0: # To avoid division by zero
+        if magnitude != 0:  # To avoid division by zero
             dx = dx/magnitude
             dy = dy/magnitude
         return [-dy,dx]

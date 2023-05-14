@@ -126,7 +126,7 @@ class car:
             then applies a rotation matrix to the vertices to adjust for the car's rotation.
         """
         # return type is a list
-        # Step 1: Calculate the center of the car
+        # Step 1 : Calculate the center of the car
         center = self.center()
 
         # Step 2: Calculate the four vertices of the car

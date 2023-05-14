@@ -24,7 +24,7 @@ class car:
         self.coins = 0
         self.light = False
         # Car Pyhsics
-        self.rot = 0  # is am rotating or not -->> can be 1 or -1
+        self.rot = 0  # is am rotating or not -->> can be 1.5 or -1.5
         self.rotAngle = 0  # what value of rotation
         self.currSpeed = 0  # 1 if 'w' or 's' else 0
         self.speed = 0     # to be increment
@@ -41,16 +41,16 @@ class car:
         glBindTexture(GL_TEXTURE_2D,CAR)
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
-        glTexCoord(0,1)
+        glTexCoord(0, 1)
         glVertex(self.left, self.top, 0)
 
-        glTexCoord(0,0)
+        glTexCoord(0, 0)
         glVertex(self.left, self.bottom, 0)
 
-        glTexCoord(1,0)
+        glTexCoord(1, 0)
         glVertex(self.right, self.bottom, 0)
 
-        glTexCoord(1,1)
+        glTexCoord(1, 1)
         glVertex(self.right, self.top, 0)
         glEnd()
 

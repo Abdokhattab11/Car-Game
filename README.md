@@ -7,7 +7,7 @@
  </div>
  
  ## 🎥 Gameplay
- <div align="center"> <img src="https://im2.ezgif.com/tmp/ezgif-2-7f6f77e28a.gif" />
+ <div align="center"> <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/cd3c1b11-7158-4ffa-810b-3cc749019b0a" />
  </div>
  
 

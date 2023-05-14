@@ -3,7 +3,11 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+
+#creating a list of texture names that will be used to identify each texture.
 texture_names = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+
+# assigning a unique integer identifier to each texture using global constants, which makes it easier to refer to textures throughout the code.
 STAR = 0
 CAR = 1
 HEALTH = 2
@@ -27,11 +31,17 @@ FINISH_LINE = 19
 YOU_WIN = 20
 HOME_YEL = 21
 HOME_RED = 22
+
 def load_texture():
+    """
+    enables 2D texture mapping for OpenGL, loads all the texture images and stores them as a list of texture binary data.
+    It then generates a unique texture name for each image and sets up the texture parameters for each texture using the setup_texture() function.
+    """
     glEnable(GL_TEXTURE_2D)
 
     images = []
 
+    # Load images from files
     images.append(pygame.image.load("texture/star.png"))
     images.append(pygame.image.load("texture/car.png"))
     images.append(pygame.image.load("texture/health.png"))
@@ -55,10 +65,14 @@ def load_texture():
     images.append(pygame.image.load("texture/you_win.png"))
     images.append(pygame.image.load("texture/Home_yel.png"))
     images.append(pygame.image.load("texture/Home_red.png"))
+
+    # Convert the images to raw binary image data
     textures = [pygame.image.tostring(img,"RGBA", 1) for img in images]
 
+    # Generate texture IDs
     glGenTextures(len(images), texture_names)
 
+    # Bind each texture and set texture parameters
     for i in range(len(images)):
         setup_texture(textures[i],
                       texture_names[i],
@@ -66,6 +80,9 @@ def load_texture():
                       images[i].get_height())
         
 def setup_texture(binary_img, texture_iden, width, height):
+    """
+    binds the texture to the texture identifier, sets texture parameters, and then loads the texture binary data.
+    """
     glBindTexture(GL_TEXTURE_2D, texture_iden)
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)

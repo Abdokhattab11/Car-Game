@@ -71,30 +71,30 @@ def display():
     if credits_sc == 1:
         # BACk Button
         if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
-            draw_texture(260,20,460,100,BACK_RED)
+            draw_texture(260, 20, 460, 100, BACK_RED)
         else:
             draw_texture(260,20,460,100,BACK_YELLOW)
-        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,CREDIT_SCREEN)
+        draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, CREDIT_SCREEN)
     # if We Are in Start screen , load background with 3 buttons
     elif start_game == 0:
         glLoadIdentity()
         # ON START Button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 280 and mouse_y <= 360:
-            draw_texture(280,340,520,420,START_RED)
+            draw_texture(280, 340, 520, 420, START_RED)
         else:
-            draw_texture(280,340,520,420,START_YELLOW)
+            draw_texture(280, 340, 520, 420, START_YELLOW)
         # On CREDITS button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 380 and mouse_y <= 460:
-            draw_texture(280,240,520,320,CREDIT_RED)
+            draw_texture(280, 240, 520, 320, CREDIT_RED)
         else:
-            draw_texture(280,240,520,320,CREDIT_YELLOW)
+            draw_texture(280, 240, 520, 320, CREDIT_YELLOW)
 
         # On EXIT button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 480 and mouse_y <= 560:
-            draw_texture(280,140,520,220,EXIT_RED)
+            draw_texture(280, 140, 520, 220, EXIT_RED)
         else:
-            draw_texture(280,140,520,220,EXIT_YELLOW)
-        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
+            draw_texture(280, 140, 520, 220, EXIT_YELLOW)
+        draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, START_SCREEN)
     # If We are is the game play , then run the game 
     elif start_game == 1:
         # First We need to only project a small part from the map , so we use otho projection to do that
@@ -105,7 +105,7 @@ def display():
         glOrtho(cen[0] - 300, cen[0] + 300, cen[1] - 175, cen[1] + 175, -1, 1)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-        glClearColor(0.2,0.2,0.2,0)
+        glClearColor(0.2, 0.2, 0.2, 0)
         # Test if there's a collision between car & Walls
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
@@ -123,7 +123,7 @@ def display():
             carModel.coins += 1
             sounds[1].play(0)
         # Test if there's a collision between car & health
-        if test_car_health(carModel,health1):
+        if test_car_health(carModel, health1):
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
             sounds[2].set_volume(0.2)
             sounds[2].play(0)
@@ -182,8 +182,7 @@ def display():
             draw_texture(480,30,720,130,HOME_RED)
         else:
             draw_texture(480,30,720,130,HOME_YEL)
-        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,YOU_WIN)
-
+        draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, YOU_WIN)
 
     glutSwapBuffers()
 

@@ -7,7 +7,7 @@
  
  </div>
  
- ## Gameplay
+ ## 🎥 Gameplay
  <div align="center"> <img src="https://media4.giphy.com/media/SvLJ0RFuwQIpnCuBL2/giphy.gif?cid=6c09b9522qmhxsj62ecs5suwzpvk88jr8gq35o7doxzknkcr&ep=v1_stickers_related&rid=giphy.gif&ct=s" width = "150px" height = "150px"/>
  </div>
  
@@ -41,7 +41,7 @@ P --> Music🎵
 
 SPACE --> Brake 🛑
 
-## ScreenShots
+## 📷 ScreenShots
 
 <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/9117b545-a5f8-44ac-aa42-e02cb9b817ce" width = "400" height="300" /> 
 <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/470e91fe-1a52-471f-be9e-a8e6a7ac4d06" width = "400" height="300" />

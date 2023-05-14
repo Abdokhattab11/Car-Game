@@ -10,7 +10,7 @@ class point:
 class Collosion:
     def line_polygon_intersect(self,line, vertices):
         """
-        return True if Line intersect with rect
+        We use SAT here to check collision
         """
         lstOfVertices = line.get_vertices()
         if self.two_polygon_intersect(lstOfVertices, vertices):
@@ -23,6 +23,8 @@ class Collosion:
     
     def two_polygon_intersect(self, VerticesA ,VerticesB):
         """
+        separating axis theorem implementation
+        this function check if there's a collision between any two convex polygon or not
         Vertices : 2D List , Vertices[i][0] -> x, Vertices[i][1] -> y
         """
         # First we need to find all edges in shape A
@@ -52,6 +54,10 @@ class Collosion:
             
 
     def projectVertices(self,vertices,axis):
+        """
+        This function project a list of vertices on axis by using dot product 
+        Then return the max point and min point on axis
+        """
         minA, maxA = OO, -OO
         # to project point on axis , just do dot product
         for v in vertices:
@@ -63,6 +69,9 @@ class Collosion:
         return (minA,maxA)
     
     def get_unit_normal_vector(self,p1,p2):
+        """"
+        return unit normal vector of edge p1p2
+        """
         dx = p2[0] - p1[0]
         dy = p2[1] - p1[1]
         magnitude = sqrt(dx**2 + dy**2)
@@ -74,6 +83,9 @@ class Collosion:
 col = Collosion()
 
 def test_car_walls(carModel, walls):
+    """
+    this method use SAT to check car & walls collision
+    """
     vertices = carModel.get_vertices()
     for i in walls:
         if col.line_polygon_intersect(i,vertices):
@@ -81,6 +93,9 @@ def test_car_walls(carModel, walls):
     return False
 
 def test_car_coin(carModel, coins):
+    """
+    this method use SAT to check car & coin collision
+    """
     carVertices = carModel.get_vertices()
     for i in coins:
         if i.collected == True:
@@ -92,6 +107,9 @@ def test_car_coin(carModel, coins):
     return False
 
 def test_car_bomb(carModel,bombs):
+    """
+    this method use SAT to check car & bomb collision
+    """
     carVertices = carModel.get_vertices()
     for i in bombs:
         if i.collected == True:
@@ -103,6 +121,9 @@ def test_car_bomb(carModel,bombs):
     return False
 
 def test_car_health(carModel,health):
+    """
+    this method use SAT to check car & health collision
+    """
     carVertices = carModel.get_vertices()
     for i in health:
         if i.collected:
@@ -114,6 +135,9 @@ def test_car_health(carModel,health):
     return False
 
 def test_car_finish(carModel,finsh):
+    """
+    this method use SAT to check car & finishLine collision
+    """
     carVertices = carModel.get_vertices()
     for i in finsh:
         healthVertices = i.get_vertices()
@@ -121,6 +145,8 @@ def test_car_finish(carModel,finsh):
             return True
     return False
 
+
+# TESTING 
 if __name__ == "__main__":
     c = Collosion()
     if c.two_polygon_intersect([[0,0],[10,0],[10,10],[0,10]], [[20,0],[30,0],[30,10],[20,10]]) == False:

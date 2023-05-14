@@ -158,5 +158,6 @@ class car:
             rotated_vertex[1] += center[1]
             rotated_vertices.append(rotated_vertex)
             
+            
         # Step 6: Return the rotated vertices
         return rotated_vertices

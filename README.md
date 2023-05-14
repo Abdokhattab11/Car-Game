@@ -45,10 +45,10 @@ SPACE --> Brake 🛑
 
 <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/9117b545-a5f8-44ac-aa42-e02cb9b817ce" width = "500" height="300" /> <img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/470e91fe-1a52-471f-be9e-a8e6a7ac4d06" width = "500" height="300" />
 
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/c1ded0ce-1a45-48aa-9fae-98ad6c5317fa" width = "500" height="300" />
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/c6f01d3b-f449-4c5d-af11-d6f55440fbf5" width = "500" height="300" />
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/b50c3a1f-ff07-481b-8304-4a6c4eeb115b" width = "500" height="300" />
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/7b036ac0-8682-410b-9ccd-23aa3cffba96" width = "500" height="300" />
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/68235945-d0fd-4685-a540-cd18fb6bd8d6" width = "500" height="300" />
-<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/82b99383-1dae-46d6-a48d-8a2f488090d7" width = "500" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/c1ded0ce-1a45-48aa-9fae-98ad6c5317fa" width = "400" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/c6f01d3b-f449-4c5d-af11-d6f55440fbf5" width = "400" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/b50c3a1f-ff07-481b-8304-4a6c4eeb115b" width = "400" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/7b036ac0-8682-410b-9ccd-23aa3cffba96" width = "400" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/68235945-d0fd-4685-a540-cd18fb6bd8d6" width = "400" height="300" />
+<img src="https://github.com/Abdokhattab11/Car-Game/assets/124710627/82b99383-1dae-46d6-a48d-8a2f488090d7" width = "400" height="300" />
 

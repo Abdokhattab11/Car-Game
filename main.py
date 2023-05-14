@@ -63,9 +63,11 @@ def init_proj():
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     global start_game, game_over,you_win
+    # Check if the health become <= 0 , to close play screen and open GameOver
     if carModel.health <= 0:
         start_game = 2 
         game_over = 1
+    # If User open credits button , Load credits SCREEN with back button
     if credits_sc == 1:
         # BACk Button
         if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
@@ -73,6 +75,7 @@ def display():
         else:
             draw_texture(260,20,460,100,BACK_YELLOW)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,CREDIT_SCREEN)
+    # if We Are in Start screen , load background with 3 buttons
     elif start_game == 0:
         glLoadIdentity()
         # ON START Button
@@ -92,57 +95,67 @@ def display():
         else:
             draw_texture(280,140,520,220,EXIT_YELLOW)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
-        
+    # If We are is the game play , then run the game 
     elif start_game == 1:
+        # First We need to only project a small part from the map , so we use otho projection to do that
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         cen = carModel.center()
+        # projection is related to center of car , we need the center of the car to be the center of the screen
         glOrtho(cen[0] - 300, cen[0] + 300, cen[1] - 175, cen[1] + 175, -1, 1)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         glClearColor(0.2,0.2,0.2,0)
+        # Test if there's a collision between car & Walls
         if test_car_walls(carModel, maze1):
             carModel.collosion = True
             sounds[0].set_volume(0.2)
             sounds[0].play(0)
             sounds[5].stop()
             sounds[6].stop()
+        # Test if there's a collision between car & bomb
         if test_car_bomb(carModel, bombs1):
             sounds[12].set_volume(0.5)
             sounds[12].play(0)
             carModel.health -= 50
+        # Test if there's a collision between car & coin
         if test_car_coin(carModel, coins1):
             carModel.coins += 1
             sounds[1].play(0)
+        # Test if there's a collision between car & health
         if test_car_health(carModel,health1):
             carModel.health = carModel.health + 20 if carModel.health + 20 < 100 else 100
             sounds[2].set_volume(0.2)
             sounds[2].play(0)
+        # Test if there's a collision between car & Walls , if true , then load you win screen
         if test_car_finish(carModel,finish):
             sounds[13].set_volume(0.5)
             sounds[13].play(0)
             you_win = 1
             start_game = 4
+        # Draw Health Bar & Coins counter
         glPushMatrix()
         glTranslate(-230,165,0)
         draw_health(carModel.health, cen)
         glPopMatrix()
-
         glPushMatrix()
         s = "stars : " + str(carModel.coins)
         print_text(s,cen[0]-285,cen[1] + 140)
         glPopMatrix()
-
+        
+        # Draw Map & Items that are on the map 
         draw_map()
         draw_coins()
         draw_healthkit()
         draw_bombs()
         draw_finish()
 
+        # Draw Car and perform the animation of the car based on car attributes 
         glPushMatrix()
         carModel.animation()
         carModel.draw()
         glPopMatrix()
+    # if game over , then load game over scree 
     elif game_over == 1:
         sounds[8].stop()
         glClearColor(0,0,0,0)
@@ -159,6 +172,7 @@ def display():
         else:
             draw_texture(480,30,720,130,EXIT2_YEL)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,PLAY_AGAIN)
+    # if you win , then load you win screen
     elif you_win == 1:
         sounds[8].stop()
         glClearColor(0,0,0,0)
@@ -177,6 +191,9 @@ def display():
     glutSwapBuffers()
 
 def draw_texture(left,bottom, right,top,tex_iden):
+    """
+    this function Draw a texture on a rectangle
+    """
     glBindTexture(GL_TEXTURE_2D, tex_iden)
     glColor3f(1,1,1)
     glBegin(GL_POLYGON)
@@ -197,6 +214,9 @@ def Timer(v):
 
 
 def print_text(s, x, y):
+    """
+    this function draw text on the screen
+    """
     glLineWidth(2)
     glColor3f(1, 1, 0)
     glTranslate(x, y, 0)
@@ -208,25 +228,28 @@ def print_text(s, x, y):
 
 def keyboard(key, x, y):
     global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag,Song_Flag
+    # if user hit 'w', then we need to make speed to be reaced = 2.5 and dir of car is postive
     if key == b"w":
         carModel.speed = 2.5   # <ws----------------------- This is the edit of speed
-        carModel.dir = 1
         if Go_Drive_Flag == False and start_game == 1:
             sounds[5].set_volume(0.1)
             sounds[5].play(-1)
             Go_Drive_Flag = True
+    # if user hit 's', then we need to make speed to be reaced = -2 and 
     if key == b"s":
         carModel.speed = -2
-        carModel.dir = -1
         if Go_Back_Flag==False and start_game == 1:
             sounds[6].set_volume(0.5)
             sounds[6].play(-1)
             sounds[11].play(-1)
             Go_Back_Flag=True
+    # Rot is clockwise
     if key == b"d":
         carModel.rot = -1.5  # to make it smooths
+    # Rot is anti-clockwise
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
+    # Break key 
     if key == b" ":
         sounds[11].stop()
         sounds[6].stop()
@@ -237,7 +260,7 @@ def keyboard(key, x, y):
         carModel.speed = 0
         sounds[6].stop()
         sounds[5].stop()
-        
+    # Klaxon sound
     if key == b"e" and start_game == 1:
         sounds[3].set_volume(0.2)
         sounds[3].play(0)
@@ -248,11 +271,15 @@ def keyboard(key, x, y):
         else:
             Song_Flag=True
             sounds[8].play(0)
+    # Exit the game
     if key == b'q':
         os._exit(0)
 
 
 def keyboardup(key, x, y):
+    """
+    This function is trace if we left the button or not , if we left it then do some action
+    """
     global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag
     if key == b"w" or key == b"s":
         carModel.speed = 0
@@ -268,6 +295,9 @@ def keyboardup(key, x, y):
         Break_Flag=False
 
 def mousePass(x,y):
+    """
+    this function Trace the mouse postision on the screen in order to play sound when user hit the button
+    """
     global mouse_x,mouse_y, On_button
     mouse_x = x
     mouse_y = y
@@ -306,6 +336,9 @@ def mousePass(x,y):
 
 
 def mouse(state,key,x,y):
+    """
+    mouse function is check it user is on a button and click on it or not
+    """
     global start_game, credits_sc, carModel,game_over,you_win
     if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0:
         start_game = 1

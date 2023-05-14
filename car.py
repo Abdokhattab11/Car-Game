@@ -28,7 +28,7 @@ class car:
         self.backwardAcc = -0.0233333
         # in case of inertia
         self.friction = -0.05
-        self.collision = False
+        self.collosion = False
 
     def draw(self):
         glBindTexture(GL_TEXTURE_2D,CAR)

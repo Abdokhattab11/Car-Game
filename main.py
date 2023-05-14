@@ -98,7 +98,7 @@ def display():
         glLoadIdentity()
         glClearColor(0.2, 0.2, 0.2, 0)
         if test_car_walls(carModel, maze1):
-            carModel.collision = True
+            carModel.collosion = True
             sounds[0].set_volume(0.2)
             sounds[0].play(0)
             sounds[5].stop()
@@ -180,11 +180,11 @@ def keyboard(key, x, y):
     if key == b"s":
         carModel.speed = -0.8
         carModel.dir = -1
-        if Go_Back_Flag==False and start_game == 1:
+        if Go_Back_Flag == False and start_game == 1:
             sounds[6].set_volume(0.5)
             sounds[6].play(-1)
             sounds[11].play(-1)
-            Go_Back_Flag=True
+            Go_Back_Flag = True
     if key == b"d":
         carModel.rot = -1.5  # to make it smooths
     if key == b"a":
@@ -192,7 +192,7 @@ def keyboard(key, x, y):
     if key == b" ":
         if carModel.currSpeed == carModel.speed != 0 and Break_Flag == False and start_game == 1:
             sounds[7].play(0)
-            Break_Flag==True
+            Break_Flag == True
         carModel.currSpeed = 0
         carModel.speed = 0
         sounds[6].stop()

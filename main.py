@@ -48,6 +48,7 @@ sounds[8].set_volume(0.3)
 sounds[10].set_volume(0.5)
 sounds[11].set_volume(0.08)
 
+
 def init_proj():
     glClearColor(0, 0, 0, 0)
     glMatrixMode(GL_PROJECTION)
@@ -185,6 +186,7 @@ def display():
         draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, YOU_WIN)
 
     glutSwapBuffers()
+
 
 def draw_texture(left,bottom, right,top,tex_iden):
     """

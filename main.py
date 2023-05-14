@@ -144,6 +144,7 @@ def display():
         carModel.draw()
         glPopMatrix()
     elif game_over == 1:
+        sounds[8].stop()
         glClearColor(0,0,0,0)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -159,6 +160,7 @@ def display():
             draw_texture(480,30,720,130,EXIT2_YEL)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,PLAY_AGAIN)
     elif you_win == 1:
+        sounds[8].stop()
         glClearColor(0,0,0,0)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -207,14 +209,14 @@ def print_text(s, x, y):
 def keyboard(key, x, y):
     global carModel,Go_Drive_Flag,Go_Back_Flag,Break_Flag,Song_Flag
     if key == b"w":
-        carModel.speed = 1.5   # <ws----------------------- This is the edit of speed
+        carModel.speed = 2.5   # <ws----------------------- This is the edit of speed
         carModel.dir = 1
         if Go_Drive_Flag == False and start_game == 1:
             sounds[5].set_volume(0.1)
             sounds[5].play(-1)
             Go_Drive_Flag = True
     if key == b"s":
-        carModel.speed = -0.8
+        carModel.speed = -2
         carModel.dir = -1
         if Go_Back_Flag==False and start_game == 1:
             sounds[6].set_volume(0.5)
@@ -226,10 +228,12 @@ def keyboard(key, x, y):
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
+        sounds[11].stop()
+        sounds[6].stop()
         if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False and start_game == 1:
             sounds[7].play(0)
             Break_Flag==True
-        carModel.currSpeed = 0
+        carModel.currSpeed = carModel.currSpeed / 2 
         carModel.speed = 0
         sounds[6].stop()
         sounds[5].stop()
@@ -244,7 +248,8 @@ def keyboard(key, x, y):
         else:
             Song_Flag=True
             sounds[8].play(0)
-    
+    if key == b'q':
+        os._exit(0)
 
 
 def keyboardup(key, x, y):

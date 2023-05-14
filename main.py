@@ -340,14 +340,14 @@ def mouse(state,key,x,y):
     mouse function is check it user is on a button and click on it or not
     """
     global start_game, credits_sc, carModel,game_over,you_win
-    if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0:
+    if x >= 280 and x <= 520 and y >= 280 and y <= 360 and key == GLUT_LEFT_BUTTON  and start_game == 0 and credits_sc == 0:
         start_game = 1
         sounds[9].stop()
         sounds[4].set_volume(0.2)
         sounds[4].play(0)
     if x >= 280 and x <= 520 and y >= 380 and y <= 460 and key == GLUT_LEFT_BUTTON  and start_game == 0 and credits_sc == 0:
         credits_sc = 1
-    if x >= 280 and x <= 520 and y >= 480 and y <= 560 and  key == GLUT_LEFT_BUTTON and start_game == 0:
+    if x >= 280 and x <= 520 and y >= 480 and y <= 560 and  key == GLUT_LEFT_BUTTON and start_game == 0 and credits_sc == 0:
         os._exit(0) 
     if x >= 260 and x <= 460 and y >= 600 and y <= 680 and key ==GLUT_LEFT_BUTTON and credits_sc == 1:
         credits_sc = 0

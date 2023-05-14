@@ -140,3 +140,48 @@ class car:
             rotated_vertices.append(rotated_vertex)
         # Step 6: Return the rotated vertices
         return rotated_vertices
+    def draw_headlights(self):
+        # glEnable(GL_DEPTH_TEST)
+        glEnable(GL_LIGHTING)
+        glEnable(GL_LIGHT0)
+        glEnable(GL_COLOR_MATERIAL)
+        glShadeModel(GL_SMOOTH)
+
+        ambient = (0.2, 0.2, 0.2, 1.0)
+        diffuse = (0.9, 0.9, 0.9, 1.0)
+        specular = (1.0, 1.0, 1.0, 1.0)
+        position = (1.0, 1.0, 1.0, 1.0)
+
+        glLightfv(GL_LIGHT0, GL_AMBIENT, ambient)
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse)
+        glLightfv(GL_LIGHT0, GL_SPECULAR, specular)
+        glLightfv(GL_LIGHT0, GL_POSITION, position)
+
+        glMaterialfv(GL_FRONT, GL_AMBIENT, ambient)
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse)
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
+        glMaterialf(GL_FRONT, GL_SHININESS, 100.0)
+
+        # glClear(GL_DEPTH_BUFFER_BIT)
+        glColor3f(1, 1, 0.5)  # yellow color for the light
+        glPushMatrix()
+        glTranslate(self.right, self.bottom + 6, 0)
+        glBegin(GL_TRIANGLES)
+        glNormal3f(0.0, 0.0, 1.0)
+        glVertex3f(0, 0, 0)
+        glVertex3f(25, -12, 0)
+        glVertex3f(25, 15, 0)
+        glEnd()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslate(self.right, self.top - 6, 0)
+        glBegin(GL_TRIANGLES)
+        glNormal3f(0.0, 0.0, -1.0)
+        glVertex3f(0, 0, 0)
+        glVertex3f(25, 12, 0)
+        glVertex3f(25, -15, 0)
+        glEnd()
+        glPopMatrix()
+        glDisable(GL_LIGHT0)
+        glDisable(GL_LIGHTING)

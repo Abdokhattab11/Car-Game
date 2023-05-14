@@ -28,8 +28,8 @@ class car:
         self.rotAngle = 0  # what value of rotation
         self.currSpeed = 0  # 1 if 'w' or 's' else 0
         self.speed = 0     # to be increment
-        self.forwardAcc = 0.02333333
-        self.backwardAcc = -0.0233333
+        self.forwardAcc = 0.02
+        self.backwardAcc = -0.02
         # in case of inertia
         self.friction = -0.05
         self.collosion = False

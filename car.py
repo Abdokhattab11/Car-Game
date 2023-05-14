@@ -9,6 +9,10 @@ import pygame
 
 class car:
     def __init__(self):
+        """
+        The __init__ method initializes the car's position and state attributes,
+        as well as its physics attributes such as speed and acceleration.
+        """
         # Coordinates
         self.left = 20
         self.bottom = 20
@@ -31,9 +35,9 @@ class car:
         self.collosion = False
 
     def draw(self):
-        '''
-        Draw Car Modul with texture
-        '''
+        """
+        This method uses the OpenGL library to draw the car onto the screen. It uses the texture module to apply a texture to the car.
+        """
         glBindTexture(GL_TEXTURE_2D,CAR)
         glColor3f(1, 1, 1)
         glBegin(GL_POLYGON)
@@ -53,9 +57,16 @@ class car:
         glBindTexture(GL_TEXTURE_2D, -1)
 
     def center(self):
+        """
+        This method calculates the center of the car, which is used in other methods to position and rotate it.
+        """
         return [(self.right + self.left)/2, (self.top + self.bottom)/2]
 
     def animation(self):
+        """
+        This method updates the car's position and rotation based on its speed and any collision events.
+        It also updates the car's rotation angle if the rot attribute is set.
+        """
         if self.collosion:
             self.health -= int(10*abs(self.currSpeed)) # Health decrease proportoinal to currSpeed
             sign1 = 1 if self.currSpeed > 0 else -1
@@ -109,6 +120,11 @@ class car:
         return
         
     def get_vertices(self):
+        """ 
+            This method calculates the four vertices of the car, which are used in collision detection.
+            It first calculates the center of the car,
+            then applies a rotation matrix to the vertices to adjust for the car's rotation.
+        """
         # return type is a list
         # Step 1: Calculate the center of the car
         center = self.center()

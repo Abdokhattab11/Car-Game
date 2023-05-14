@@ -20,7 +20,7 @@ class car:
         self.coins = 0
         self.light = False
         # Car Pyhsics
-        self.rot = 0  # is am rotating or not -->> can be 1 or -1
+        self.rot = 0  # is am rotating or not -->> can be 1.5 or -1.5
         self.rotAngle = 0  # what value of rotation
         self.currSpeed = 0  # 1 if 'w' or 's' else 0
         self.speed = 0     # to be increment
@@ -28,7 +28,7 @@ class car:
         self.backwardAcc = -0.0233333
         # in case of inertia
         self.friction = -0.05
-        self.collosion = False
+        self.collision = False
 
     def draw(self):
         glBindTexture(GL_TEXTURE_2D,CAR)

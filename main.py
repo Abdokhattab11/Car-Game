@@ -65,7 +65,7 @@ def display():
     if credits_sc == 1:
         # BACk Button
         if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
-            draw_texture(260,20,460,100,BACK_RED)
+            draw_texture(260, 20, 460, 100, BACK_RED)
         else:
             draw_texture(260,20,460,100,BACK_YELLOW)
         draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,CREDIT_SCREEN)
@@ -73,21 +73,21 @@ def display():
         glLoadIdentity()
         # ON START Button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 280 and mouse_y <= 360:
-            draw_texture(280,340,520,420,START_RED)
+            draw_texture(280, 340, 520, 420, START_RED)
         else:
             draw_texture(280,340,520,420,START_YELLOW)
         # On CREDITS button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 380 and mouse_y <= 460:
-            draw_texture(280,240,520,320,CREDIT_RED)
+            draw_texture(280, 240, 520, 320, CREDIT_RED)
         else:
-            draw_texture(280,240,520,320,CREDIT_YELLOW)
+            draw_texture(280, 240, 520, 320, CREDIT_YELLOW)
 
         # On EXIT button
         if mouse_x >= 280 and mouse_x <= 520 and mouse_y >= 480 and mouse_y <= 560:
-            draw_texture(280,140,520,220,EXIT_RED)
+            draw_texture(280, 140, 520, 220, EXIT_RED)
         else:
-            draw_texture(280,140,520,220,EXIT_YELLOW)
-        draw_texture(0,0,WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
+            draw_texture(280, 140, 520, 220, EXIT_YELLOW)
+        draw_texture(0, 0, WINDOW_WIDTH,WINDOW_HEIGHT,START_SCREEN)
         
     elif start_game == 1:
         glMatrixMode(GL_PROJECTION)
@@ -96,9 +96,9 @@ def display():
         glOrtho(cen[0] - 300, cen[0] + 300, cen[1] - 175, cen[1] + 175, -1, 1)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-        glClearColor(0.2,0.2,0.2,0)
+        glClearColor(0.2, 0.2, 0.2, 0)
         if test_car_walls(carModel, maze1):
-            carModel.collosion = True
+            carModel.collision = True
             sounds[0].set_volume(0.2)
             sounds[0].play(0)
             sounds[5].stop()
@@ -123,13 +123,13 @@ def display():
         draw_bombs()
         
         glPushMatrix()
-        glTranslate(-20,5,0)
+        glTranslate(-20, 5, 0)
         draw_health(carModel.health)
         glPopMatrix()
 
         glPushMatrix()
         s = "Coins : " + str(carModel.coins)
-        print_text(s,20,WINDOW_HEIGHT - 40)
+        print_text(s, 20, WINDOW_HEIGHT - 40)
         glPopMatrix()
 
         glPushMatrix()
@@ -140,16 +140,16 @@ def display():
 
 def draw_texture(left,bottom, right,top,tex_iden):
     glBindTexture(GL_TEXTURE_2D, tex_iden)
-    glColor3f(1,1,1)
+    glColor3f(1, 1, 1)
     glBegin(GL_POLYGON)
-    glTexCoord(0,0)
-    glVertex2d(left,bottom)
-    glTexCoord(1,0)
-    glVertex2d(right,bottom)
-    glTexCoord(1,1)
-    glVertex2d(right,top)
-    glTexCoord(0,1)
-    glVertex2d(left,top)
+    glTexCoord(0, 0)
+    glVertex2d(left, bottom)
+    glTexCoord(1, 0)
+    glVertex2d(right, bottom)
+    glTexCoord(1, 1)
+    glVertex2d(right, top)
+    glTexCoord(0, 1)
+    glVertex2d(left, top)
     glEnd()
     glBindTexture(GL_TEXTURE_2D, -1)
 
@@ -190,7 +190,7 @@ def keyboard(key, x, y):
     if key == b"a":
         carModel.rot = 1.5  # to make it smooth
     if key == b" ":
-        if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False and start_game == 1:
+        if carModel.currSpeed == carModel.speed != 0 and Break_Flag == False and start_game == 1:
             sounds[7].play(0)
             Break_Flag==True
         carModel.currSpeed = 0

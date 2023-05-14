@@ -7,7 +7,7 @@
  </div>
  
  ## 🎥 Gameplay
- <div align="center"> <img src="https://media4.giphy.com/media/SvLJ0RFuwQIpnCuBL2/giphy.gif?cid=6c09b9522qmhxsj62ecs5suwzpvk88jr8gq35o7doxzknkcr&ep=v1_stickers_related&rid=giphy.gif&ct=s" width = "150px" height = "150px"/>
+ <div align="center"> <img src="https://im2.ezgif.com/tmp/ezgif-2-7f6f77e28a.gif" />
  </div>
  
 

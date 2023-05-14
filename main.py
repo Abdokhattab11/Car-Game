@@ -134,10 +134,7 @@ def display():
             you_win = 1
             start_game = 4
         # Draw Health Bar & Coins counter
-        glPushMatrix()
-        glTranslate(-230,165,0)
         draw_health(carModel.health, cen)
-        glPopMatrix()
         glPushMatrix()
         s = "stars : " + str(carModel.coins)
         print_text(s,cen[0]-285,cen[1] + 140)

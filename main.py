@@ -74,7 +74,7 @@ def display():
         if mouse_x >= 260 and mouse_x <= 460 and mouse_y >= 700-100 and mouse_y <= 700-20:
             draw_texture(260, 20, 460, 100, BACK_RED)
         else:
-            draw_texture(260,20,460,100,BACK_YELLOW)
+            draw_texture(260, 20, 460, 100, BACK_YELLOW)
         draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, CREDIT_SCREEN)
     # if We Are in Start screen , load background with 3 buttons
     elif start_game == 0:
@@ -162,11 +162,11 @@ def display():
         glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1)
         glMatrixMode(GL_MODELVIEW)
         if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-250 and mouse_y <= 700-150:
-            draw_texture(480,150,720,250,TRY_AGAIN_RED)
+            draw_texture(480, 150, 720, 250, TRY_AGAIN_RED)
         else:
-            draw_texture(480,150,720,250,TRY_AGAIN_YEL)
+            draw_texture(480, 150, 720, 250, TRY_AGAIN_YEL)
         if mouse_x >= 480 and mouse_x <= 720 and mouse_y >= 700-130 and mouse_y <= 700-30:
-            draw_texture(480,30,720,130,EXIT2_RED)
+            draw_texture(480, 30, 720, 130, EXIT2_RED)
         else:
             draw_texture(480, 30, 720, 130, EXIT2_YEL)
         draw_texture(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, PLAY_AGAIN)
@@ -206,6 +206,7 @@ def draw_texture(left,bottom, right,top,tex_iden):
     glEnd()
     glBindTexture(GL_TEXTURE_2D, -1)
 
+
 def Timer(v):
     display()
     glutTimerFunc(PERIOD, Timer, 1)
@@ -236,7 +237,7 @@ def keyboard(key, x, y):
     # if user hit 's', then we need to make speed to be reaced = -2 and 
     if key == b"s":
         carModel.speed = -2
-        if Go_Back_Flag==False and start_game == 1:
+        if Go_Back_Flag == False and start_game == 1:
             sounds[6].set_volume(0.5)
             sounds[6].play(-1)
             sounds[11].play(-1)
@@ -251,9 +252,9 @@ def keyboard(key, x, y):
     if key == b" ":
         sounds[11].stop()
         sounds[6].stop()
-        if carModel.currSpeed==carModel.speed!=0 and Break_Flag==False and start_game == 1:
+        if carModel.currSpeed == carModel.speed != 0 and Break_Flag == False and start_game == 1:
             sounds[7].play(0)
-            Break_Flag==True
+            Break_Flag == True
         carModel.currSpeed = carModel.currSpeed / 2 
         carModel.speed = 0
         sounds[6].stop()
@@ -292,11 +293,12 @@ def keyboardup(key, x, y):
     if key == b" ":
         Break_Flag=False
 
-def mousePass(x,y):
+
+def mousePass(x, y):
     """
     this function Trace the mouse postision on the screen in order to play sound when user hit the button
     """
-    global mouse_x,mouse_y, On_button
+    global mouse_x, mouse_y, On_button
     mouse_x = x
     mouse_y = y
     # Start
@@ -333,7 +335,7 @@ def mousePass(x,y):
         On_button = False
 
 
-def mouse(state,key,x,y):
+def mouse(state, key, x, y):
     """
     mouse function is check it user is on a button and click on it or not
     """

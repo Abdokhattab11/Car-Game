@@ -5,7 +5,7 @@ from OpenGL.GLUT import *
 
 
 #creating a list of texture names that will be used to identify each texture.
-texture_names = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+texture_names = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
 # assigning a unique integer identifier to each texture using global constants, which makes it easier to refer to textures throughout the code.
 STAR = 0
@@ -31,6 +31,7 @@ FINISH_LINE = 19
 YOU_WIN = 20
 HOME_YEL = 21
 HOME_RED = 22
+
 
 def load_texture():
     """
@@ -78,7 +79,8 @@ def load_texture():
                       texture_names[i],
                       images[i].get_width(),
                       images[i].get_height())
-        
+
+
 def setup_texture(binary_img, texture_iden, width, height):
     """
     binds the texture to the texture identifier, sets texture parameters, and then loads the texture binary data.
